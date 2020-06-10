@@ -1,0 +1,53 @@
+.input-container{
+	margin-bottom:15px;
+}
+
+input[type=text], input[type=email], input[type=date], textarea, select {
+  width: 100%;
+  padding: 3px 15px;
+  margin: 8px 0 0;
+  display: inline-block;
+  border: 1px solid #ccc !important;
+  box-sizing: border-box;
+  border-radius:0 !important;
+}
+
+select{
+	background: white;
+	height:42px !important;
+}
+
+input[type=submit] {
+  background: #666 !important;
+  color:#fff;
+}
+
+input[type=submit]:hover {
+  background-color: #000;
+}
+
+.formmsg{
+	border-radius:5px !important;
+	padding:10px 20px;
+}
+.formsuccess{
+	color: #155724;
+	background-color: #d4edda;
+	border-color: #c3e6cb;
+	
+}
+
+.formerror{
+	color: #721c24;
+	background-color: #f8d7da;
+	border-color: #f5c6cb;
+
+}
+
+.terms li{margin-bottom:20px;}
+
+label.error {
+    color: red;
+    font-size: .8em;
+    padding-top: 0;
+}

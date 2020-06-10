@@ -1,0 +1,167 @@
+<?php /* Template Name: Image Bank Template */ ?>
+
+<?php get_header(); ?>
+<?php
+    $logancee_options = logancee_get_options();
+
+    $post_layout = $logancee_options['layout-type-single-post'];
+    $blog_layout = $logancee_options['layout-type-blog'];
+
+    $post_layout = (isset($_GET['layout-type-single-post'])) ? $_GET['layout-type-single-post'] : $post_layout;
+    $blog_layout = (isset($_GET['layout-type-blog'])) ? $_GET['layout-type-blog'] : $blog_layout;
+
+    $wrap_class = '';
+    $post_class = 'post';
+
+    if($logancee_options['blog-article_list_template'] == 'grid_3_columns'){
+        $post_class .= ' post-with-3-columns ';
+    }
+
+    ?>
+
+	<div id="primary">
+		<div class="container">
+				<div class="press-hub sidebar col-md-4">
+					<form method="get" class="searchform" id="search form" action="/">	
+						<div>
+							<input type="text" value="" placeholder="SEARCH ARTICLES" name="s" id="s" />
+							<input type="hidden" value="297" name="cat" id="scat" />
+							
+							<div class="press-search-wrap">
+								<input type="submit" id="search_submit" name="Search" value=""/>
+								<div class="press-submit fa fa-search"></div>
+							</div>
+							
+						</div>
+					</form>
+					<div class="col-sm-12">
+						<div class="filter-trigger-wrapper">
+							<div class="filter-trigger">FILTER</div>
+						</div>
+					</div>             
+					<div class="filter-options col-md-12">
+						<ul>
+							<li class="product-links"><a href="/tag/press-mini-9/">Mini 9</a></li>
+							<li class="product-links"><a href="/tag/press-mini-70/">Mini 70</a></li>
+							<li class="product-links"><a href="/tag/press-mini-90/">Mini 90</a></li>
+							<li class="product-links"><a href="/tag/press-wide-300/">Wide 300</a></li>
+							<li class="product-links"><a href="/tag/press-sq10/">SQ10</a></li>
+							<li class="product-links"><a href="/tag/press-sp-2/">Share SP-2</a></li>
+						</ul>
+					</div>
+					<div class="ph-menu">
+						<h4 class="menu-title">PRESS CENTRE</h4>
+						<ul>
+							<li><a href="/press-hub"><h4>NEWS</h4></a></li>
+							<li><a href="/press-hub/image-bank"><h4>IMAGE BANK</h4></a></li>
+						</ul>
+					</div>
+					<?php get_sidebar(); ?>
+				</div>
+				<div class="col-md-8 image-bank-wrap">
+
+				<?php if( have_rows('cameras') ): ?>
+
+					<ul class="slides">
+
+					<?php while( have_rows('cameras') ): the_row(); 
+
+						// vars
+						$name = get_sub_field('name');
+						$images = get_sub_field('images');
+
+						?>
+
+						<li>
+						<h2><?php echo $name; ?></h2>
+
+						<?php 
+						
+						if( $images ): ?>
+							<ul>
+								<?php foreach( $images as $image ): ?>
+									<li style="display: inline-block;">
+					  					<input type="checkbox" class="checkbox-image" name="check_list[]" value="<?php echo $image['sizes']['large']; ?>" />
+										<a href="<?php echo $image['url']; ?>">
+											 <img src="<?php echo $image['sizes']['thumbnail']; ?>" alt="<?php echo $image['alt']; ?>" />
+										</a>
+										<p><?php echo $image['caption']; ?></p>
+									</li>
+								<?php endforeach; ?>
+							</ul>
+						<?php endif; ?>
+
+						</li>
+
+					<?php endwhile; ?>
+
+					</ul>
+
+					<button class="download-button">Download</button>
+
+				<?php endif; ?>
+		</div><!-- container -->
+		
+	</div><!-- #primary -->
+
+<script type="text/javascript" src="http://www.instax.co.uk//wp-content/themes/Instax/js/jszip.min.js"></script>
+<script type="text/javascript" src="http://www.instax.co.uk//wp-content/themes/Instax/js/jszip-utils.min.js"></script>
+<script type="text/javascript" src="http://www.instax.co.uk//wp-content/themes/Instax/js/FileSaver.min.js"></script>
+<script>
+jQuery(function () {
+	jQuery('.download-button').click(function () {
+		var urls = [];
+		jQuery("input:checked").each(function () {
+			var $this = jQuery(this);
+			var url = $this.val();
+			urls.push(url);
+		});
+
+		if (urls.length < 1) {
+			alert('Please select some images first');
+			return false;
+		}
+		
+		var zip = new JSZip();
+		var count = 0;
+		var zipFilename = "zipFilename.zip";
+		
+		urls.forEach(function(url){
+		var filename = "filename";
+		// loading a file and add it in a zip file
+		JSZipUtils.getBinaryContent(url, function (err, data) {
+			if(err) {
+				throw err; // or handle the error
+			}
+			zip.file(count + '.png', data, {binary:true});
+			count++;
+			console.log(count);
+			if (count == urls.length) {
+			//var zipFile = zip.generate({type: "blob"});
+			//saveAs(zipFile, zipFilename);
+			// when everything has been downloaded, we can trigger the dl
+			zip.generateAsync({type:"blob"}, function updateCallback(metadata) {
+			var msg = "progression : " + metadata.percent.toFixed(2) + " %";
+			if(metadata.currentFile) {
+				msg += ", current file = " + metadata.currentFile;
+			}
+			//showMessage(msg);
+			//updatePercent(metadata.percent|0);
+		})
+		.then(function callback(blob) {
+
+			// see FileSaver.js
+			saveAs(blob, "example.zip");
+
+			//showMessage("done !");
+		}, function (e) {
+			showError(e);
+		});
+			}
+		});
+		});
+	});
+});
+</script>
+
+<?php get_footer(); ?>

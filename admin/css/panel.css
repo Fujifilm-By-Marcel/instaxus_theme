@@ -1,0 +1,69 @@
+/* @group header */
+
+#redux-header .rAds{
+    z-index: -1;
+}
+
+#redux-header .skin-manager{
+    float: right;
+    color: #fff;
+    margin-top: 34px;
+    position: relative;
+}
+
+#redux-header .skin-manager .active-skin{
+    display: inline-block;
+    margin-right: 5px;
+}
+
+#redux-header .skin-manager .button{
+    display: inline-block;
+    margin-right: 5px;
+}
+
+#redux-header .skin-manager #add-skin{
+    margin-left: 20px;
+}
+
+#redux-header .skin-manager .add-skin-area{
+    position: absolute;
+    right: 0;
+    margin-top: 1px;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    opacity: 1;
+}
+
+#redux-header .skin-manager .add-skin-area.hide{
+    opacity: 0;
+    right: -100px;
+}
+
+#redux-header .skin-manager .error-permissions{
+    background: red;
+    padding: 5px 10px;
+    margin-top: 5px;
+    color: #fff;
+    clear: both;
+    text-align: center;
+}
+
+/* @end group */
+
+
+
+.redux-main .form-table-section-indented {
+    margin-left: 5% !important;
+}
+
+ul.redux-image-select{
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.mce-i-logancee{
+    background: url('../../inc/shortcodes/images/shortcode.png') center center no-repeat !important;
+    background-size: contain !important;
+}
+

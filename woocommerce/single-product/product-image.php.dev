@@ -1,0 +1,183 @@
+<?php
+/**
+ * Single Product Image
+ *
+ * @author 		WooThemes
+ * @package 	WooCommerce/Templates
+ * @version 3.1.0
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+$product = logancee_get_product();
+$post = logancee_get_post();
+$woocommerce = logancee_get_woocommerce();
+$logancee_options = logancee_get_options();
+
+$attachment_ids = $product->get_gallery_attachment_ids();
+
+$image_count = 0;
+
+if ( has_post_thumbnail() ) {
+    $image_count++;
+}
+
+foreach ( $attachment_ids as $attachment_id ) {
+    $image_link = wp_get_attachment_url( $attachment_id );
+    if ( ! $image_link )
+        continue;
+    $image_count++;
+}
+
+?>
+
+ <?php if($logancee_options['productpage-image-zoom'] != 2) { ?>
+	<script type="text/javascript">
+		(function($) {
+			$(document).ready(function(){
+				if($(window).width() > 992) {
+					<?php if($logancee_options['productpage-image-zoom'] == 1) { ?>
+						$('#image').elevateZoom({
+							zoomType: "inner",
+							cursor: "crosshair",
+							zoomWindowFadeIn: 500,
+							zoomWindowFadeOut: 750
+						});
+					<?php } else if($logancee_options['productpage-image-zoom'] == 0) { ?>
+						$('#image').elevateZoom({
+							zoomWindowFadeIn: 500,
+							zoomWindowFadeOut: 500,
+							zoomWindowOffetx: 20,
+							zoomWindowOffety: -1,
+							cursor: "crosshair",
+							lensFadeIn: 500,
+							lensFadeOut: 500,
+
+						});
+					<?php } else if($logancee_options['productpage-image-zoom'] == 3) { ?>
+					$('#image').elevateZoom({
+							zoomWindowFadeIn: 500,
+							zoomWindowFadeOut: 500,
+							zoomWindowOffetx: 20,
+							zoomWindowOffety: -1,
+							cursor: "crosshair",
+							lensFadeIn: 500,
+							lensFadeOut: 500,
+							zoomType				: "lens",
+							lensShape : "round",
+						});
+					<?php } ?>
+
+					var z_index = 0;
+					$('.thumbnails a, .thumbnails-carousel a').click(function(e) {
+						$(this).attr('data-rel', '#')
+						$('.thumbnails, .thumbnails-carousel').find('a[href="'+$('#ex1').attr('href') +'"]').attr('data-rel', 'prettyPhoto[product-gallery]')
+
+						var smallImage = $(this).attr('data-image');
+						var largeImage = $(this).attr('data-zoom-image');
+						var ez =   $('#image').data('elevateZoom');
+						$('#image').attr('srcset', '')
+						$('#ex1').attr('href', largeImage);
+						if(typeof ez !== 'undefined'){
+							ez.swaptheimage(smallImage, largeImage);
+						}
+						z_index = $(this).index('.thumbnails a, .thumbnails-carousel a');
+
+						return false;
+					});
+
+				}
+			});
+
+	})(jQuery)
+	</script>
+	<?php } ?>
+	<script type="text/javascript">
+		(function($) {
+			$(document).ready(function(){
+				$( ".single_variation_wrap" ).on( "show_variation", function ( event, variation ) {
+					var smallImage = $('#ex1 img').attr('src');
+					var largeImage =  $('#ex1').attr('href');
+					var ez =   $('#image').data('elevateZoom');
+					if(typeof ez != 'undefined'){
+						ez.swaptheimage(smallImage, largeImage);
+					}
+				} );
+			});
+
+			$(window).load(function(){
+				$('.popup-gallery a').prettyPhoto();
+				$('.thumbnails a, .thumbnails-carousel a').unbind('click.prettyphoto');
+				$('.thumbnails, .thumbnails-carousel').find('a[href="' + $('#ex1').attr('href') + '"]').attr('rel', '#')
+			})
+
+
+		})(jQuery)
+	</script>
+
+
+	<?php $image_grid = 6;
+
+	if ($logancee_options['productpage-image-size'] == 1) {
+		$image_grid = 6;
+	}
+
+	if ($logancee_options['productpage-image-size'] == 3) {
+		$image_grid = 6;
+	}
+	?>
+	<div class="col-md-<?php echo $image_grid; ?> images ">
+		<div class="row popup-gallery woocommerce-product-gallery__image">
+
+        <?
+        global $post, $product;
+        $columns           = apply_filters( 'woocommerce_product_thumbnails_columns', 4 );
+        $thumbnail_size    = apply_filters( 'woocommerce_product_thumbnails_large_size', 'full' );
+        $post_thumbnail_id = get_post_thumbnail_id( $post->ID );
+        $full_size_image   = wp_get_attachment_image_src( $post_thumbnail_id, $thumbnail_size );
+        $placeholder       = has_post_thumbnail() ? 'with-images' : 'without-images';
+        $wrapper_classes   = apply_filters( 'woocommerce_single_product_image_gallery_classes', array(
+            'woocommerce-product-gallery',
+            'woocommerce-product-gallery--' . $placeholder,
+            'woocommerce-product-gallery--columns-' . absint( $columns ),
+            'images',
+        ) );
+        ?>
+        <div class="<?php echo esc_attr( implode( ' ', array_map( 'sanitize_html_class', $wrapper_classes ) ) ); ?>" data-columns="<?php echo esc_attr( $columns ); ?>" style="opacity: 0; transition: opacity .25s ease-in-out;">
+            <figure class="woocommerce-product-gallery__wrapper">
+                <?php
+                $attributes = array(
+                    'title'                   => get_post_field( 'post_title', $post_thumbnail_id ),
+                    'data-caption'            => get_post_field( 'post_excerpt', $post_thumbnail_id ),
+                    'data-src'                => $full_size_image[0],
+                    'data-large_image'        => $full_size_image[0],
+                    'data-large_image_width'  => $full_size_image[1],
+                    'data-large_image_height' => $full_size_image[2],
+                );
+        
+                if ( has_post_thumbnail() ) {
+                    $html  = '<div data-thumb="' . get_the_post_thumbnail_url( $post->ID, 'shop_thumbnail' ) . '" class="woocommerce-product-gallery__image"><a href="#">';
+                    $html .= get_the_post_thumbnail( $post->ID, 'shop_single', $attributes );
+                    $html .= '</a></div>';
+                } else {
+                    $html  = '<div class="woocommerce-product-gallery__image--placeholder">';
+                    $html .= sprintf( '<img src="%s" alt="%s" class="wp-post-image" />', esc_url( wc_placeholder_img_src() ), esc_html__( 'Awaiting product image', 'woocommerce' ) );
+                    $html .= '</div>';
+                }
+        
+                echo apply_filters( 'woocommerce_single_product_image_thumbnail_html', $html, get_post_thumbnail_id( $post->ID ) );
+            ?>
+                <?php if ($logancee_options['productpage-image-zoom'] != 2 && $logancee_options['productpage-image-additional'] == 1):?>
+                <div class="col-md-12">
+                    <?php do_action( 'woocommerce_product_thumbnails' ); ?>
+                </div>
+                <?php endif; ?>
+            </figure>
+        </div>
+        
+
+	
+	</div>
+</div>

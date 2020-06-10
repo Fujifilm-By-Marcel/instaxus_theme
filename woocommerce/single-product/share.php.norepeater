@@ -1,0 +1,189 @@
+<?php
+/**
+ * Single Product Share
+ *
+ * Sharing plugins can hook into here or you can add your own code directly.
+ *
+ * This template can be overridden by copying it to yourtheme/woocommerce/single-product/share.php.
+ *
+ * HOWEVER, on occasion WooCommerce will need to update template files and you (the theme developer).
+ * will need to copy the new files to your theme to maintain compatibility. We try to do this.
+ * as little as possible, but it does happen. When this occurs the version of the template file will.
+ * be bumped and the readme will list any important changes.
+ *
+ * @see 	    http://docs.woothemes.com/document/template-structure/
+ * @author 		WooThemes
+ * @package 	WooCommerce/Templates
+ * @version     1.6.4
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
+?>
+
+<?php do_action( 'woocommerce_share' ); // Sharing plugins can hook into here ?>
+
+
+<?php
+$post = logancee_get_post();
+
+if ( ! $post->post_excerpt ) {
+	return;
+}
+
+?>
+<h2 class="product-name mobile-only"><?php the_title(); ?></h2>
+<div itemprop="description" class="description mobile-only desc std">
+	<?php echo apply_filters( 'woocommerce_short_description', $post->post_excerpt ) ?>
+</div>
+
+<div class="below-variants">
+<div class="col-md-12">
+            <div class="col-md-4 nopadding">
+                <a href="<?php the_field('buy_now'); ?>" target="_blank" class="vc_general vc_btn3 vc_btn3-size-md vc_btn3-shape-square blue-cta">BUY NOW</a>
+            </div>
+            <div class="col-md-8 nopadding">
+                <div class="retailer-wrap">
+                    <div class="bg-wrap">
+                        <div class="row">
+                            <div class="container">
+                                <div class="vertical-slider">
+                                    <ul class="slides">
+                                    <li>
+                                        <div class="vertical-caption">
+                                            <!-- <img src="<?php the_field('retailer_logo_1'); ?>" alt=""/> -->
+                                            <img src="/wp-content/themes/Instax/images/Retailers/argos.png" alt=""/>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="vertical-caption">
+                                            <img src="/wp-content/themes/Instax/images/Retailers/currys.jpg" alt=""/>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="vertical-caption">
+                                            <img src="/wp-content/themes/Instax/images/Retailers/boots.png" alt=""/>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="vertical-caption">
+                                            <img src="/wp-content/themes/Instax/images/Retailers/jessops.png" alt=""/>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="vertical-caption">
+                                            <img src="/wp-content/themes/Instax/images/Retailers/urbanoutfitters.png" alt=""/>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="vertical-caption">
+                                            <img src="/wp-content/themes/Instax/images/Retailers/amazon.png" alt=""/>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="vertical-caption">
+                                            <img src="/wp-content/themes/Instax/images/Retailers/johnlewis.png" alt=""/>
+                                        </div>
+                                    <li>
+                                        <div class="vertical-caption">
+                                            <img src="/wp-content/themes/Instax/images/Retailers/asos.png" alt=""/>
+                                        </div>
+                                    </li>
+                                    
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="expand-content">
+                <div class="close-content">x</div>
+                <div class="container">
+                    <p class="text-center">Available at:</p>
+                    <div class="col-xs-6 col-md-4">
+                        <a target="_blank" href="<?php the_field('retailer_link_1'); ?>">
+                            <!-- <img src="<?php the_field('retailer_logo_1'); ?>" alt=""/> -->
+                            <img src="/wp-content/themes/Instax/images/Retailers/asos.png" alt=""/>
+                        </a>
+                    </div>
+                    <div class="col-xs-6 col-md-4">
+                        <a target="_blank" href="<?php the_field('retailer_link_2'); ?>">
+                            <img src="/wp-content/themes/Instax/images/Retailers/johnlewis.png" alt=""/>
+                        </a>
+                    </div>
+                    <div class="col-xs-6 col-md-4">
+                        <a target="_blank" href="<?php the_field('retailer_link_3'); ?>">
+                            <img src="/wp-content/themes/Instax/images/Retailers/argos.png" alt=""/>
+                        </a>
+                    </div>
+                    <div class="col-xs-6 col-md-4">
+                        <a target="_blank" href="<?php the_field('retailer_link_4'); ?>">
+                            <img src="/wp-content/themes/Instax/images/Retailers/boots.png" alt=""/>
+                        </a>
+                    </div>
+                    <div class="col-xs-6 col-md-4">
+                        <a target="_blank" href="<?php the_field('retailer_link_5'); ?>">
+                            <img src="/wp-content/themes/Instax/images/Retailers/currys.jpg" alt=""/>
+                        </a>
+                    </div>
+                    <div class="col-xs-6 col-md-4">
+                        <a target="_blank" href="<?php the_field('retailer_link_6'); ?>">
+                            <img src="/wp-content/themes/Instax/images/Retailers/urbanoutfitters.png" alt=""/>
+                        </a>
+                    </div>
+                    <div class="col-xs-6 col-md-4">
+                        <a target="_blank" href="<?php the_field('retailer_link_7'); ?>">
+                            <img src="/wp-content/themes/Instax/images/Retailers/amazon.png" alt=""/>
+                        </a>
+                    </div>
+                    <div class="col-xs-6 col-md-4">
+                        <a target="_blank" href="<?php the_field('retailer_link_8'); ?>">
+                            <img src="/wp-content/themes/Instax/images/Retailers/jessops.png" alt=""/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="custom-socials-block">
+                    <div class="col-md-3 flexbox">
+                        <p>Spread the word</p>
+                    </div>
+                    <div class="col-md-9">
+                        <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Single post sidebar") ) : ?>
+                        <?php endif;?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.5.0/jquery.flexslider-min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prettyPhoto/3.1.6/js/jquery.prettyPhoto.js"></script>
+<script>
+jQuery(document).ready(function(e) {
+    jQuery('.vertical-slider').flexslider({
+		animation: "slide",
+		direction: "vertical", 
+		controlNav: false, 
+		directionNav: false,
+		useCSS: false,
+		slideshow: true,
+		slideshowSpeed: 1400,
+		randomize: true,
+	});
+	
+	jQuery().mousemove(function(e){
+        var parentOffset = $(this).parent().offset();
+        var relativeXPosition = (e.pageX - parentOffset.left); //offset -> method allows you to retrieve the current position of an element 'relative' to the document
+        var relativeYPosition = (e.pageY - parentOffset.top);
+        $("#header2").html("<p><strong>X-Position: </strong>"+relativeXPosition+" | <strong>Y-Position: </strong>"+relativeYPosition+"</p>")
+    }).mouseout(function(){
+        $("#header2").html("<p><strong>X-Position: </strong>"+relativeXPosition+" | <strong>Y-Position: </strong>"+relativeYPosition+"</p>")
+    });
+});
+
+</script>
+</div>

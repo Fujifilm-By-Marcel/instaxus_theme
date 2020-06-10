@@ -1,0 +1,333 @@
+<?php /* Template Name: Image Bank Template */ ?>
+
+<?php get_header(); ?>
+<?php
+    $logancee_options = logancee_get_options();
+
+    $post_layout = $logancee_options['layout-type-single-post'];
+    $blog_layout = $logancee_options['layout-type-blog'];
+
+    $post_layout = (isset($_GET['layout-type-single-post'])) ? $_GET['layout-type-single-post'] : $post_layout;
+    $blog_layout = (isset($_GET['layout-type-blog'])) ? $_GET['layout-type-blog'] : $blog_layout;
+
+    $wrap_class = '';
+    $post_class = 'post';
+
+    if($logancee_options['blog-article_list_template'] == 'grid_3_columns'){
+        $post_class .= ' post-with-3-columns ';
+    }
+
+    ?>
+
+	<div id="primary">
+		<div class="container">
+				<div class="press-hub sidebar col-md-4">
+					<?php add_shortcode('wpbsearch', 'get_search_form'); ?>
+					<?php echo do_shortcode("[wpbsearch]"); ?>
+					<?php
+					function SearchFilter($query) {
+						if ($query->is_search) {
+						  $query->set('cat','297');
+						}
+						return $query;
+					  }
+					  if(!is_admin())
+						add_filter('pre_get_posts','SearchFilter');
+					?>
+					<div class="col-sm-12">
+						<div class="filter-trigger-wrapper">
+							<div class="filter-trigger">FILTER</div>
+						</div>
+					</div>             
+					<div class="filter-options col-md-12">
+						<ul>
+							<li class="product-links"><a href="/tag/press-mini-9/">Mini 9</a></li>
+							<li class="product-links"><a href="/tag/press-mini-70/">Mini 70</a></li>
+							<li class="product-links"><a href="/tag/press-mini-90/">Mini 90</a></li>
+							<li class="product-links"><a href="/tag/press-wide-300/">Wide 300</a></li>
+							<li class="product-links"><a href="/tag/press-sq10/">SQ10</a></li>
+							<li class="product-links"><a href="/tag/press-sp-2/">Share SP-2</a></li>
+						</ul>
+					</div>
+					<div class="ph-menu">
+						<h4 class="menu-title">PRESS CENTRE</h4>
+						<ul>
+							<li><a href="/press-hub"><h4>NEWS</h4></a></li>
+							<li><a href="/press-hub/image-bank"><h4>IMAGE BANK</h4></a></li>
+						</ul>
+					</div>
+					<?php get_sidebar(); ?>
+				</div>
+				<div class="col-md-8">
+
+				<form method="POST">
+				<?php if( have_rows('cameras') ): ?>
+
+					<ul class="slides">
+
+					<?php while( have_rows('cameras') ): the_row(); 
+
+						// vars
+						$name = get_sub_field('name');
+						$images = get_sub_field('images');
+
+						?>
+
+						<li>
+						<h2><?php echo $name; ?></h2>
+
+						<?php 
+						
+						if( $images ): ?>
+							<ul>
+								<?php foreach( $images as $image ): ?>
+									<li style="display: inline-block;">
+					  					<input type="checkbox" class="checkbox-image" name="check_list[]" value="<?php echo $image['sizes']['large']; ?>" />
+										<a href="<?php echo $image['url']; ?>">
+											 <img src="<?php echo $image['sizes']['thumbnail']; ?>" alt="<?php echo $image['alt']; ?>" />
+										</a>
+										<p><?php echo $image['caption']; ?></p>
+									</li>
+								<?php endforeach; ?>
+							</ul>
+						<?php endif; ?>
+
+						</li>
+
+					<?php endwhile; ?>
+
+					</ul>
+
+					<input type="submit" name="download" value="download"/>
+					<button class="download-button">Download</button>
+
+				<?php endif; ?>
+				</form>
+
+				<?php
+				function ContentUrlToLocalPath($url){
+					preg_match('/.*(\/wp\-content\/uploads\/\d+\/\d+\/.*)/', $url, $mat);
+					if(count($mat) > 0) return ABSPATH . $mat[1];
+					return '';
+				}
+
+				function zip_images($files = array()) {
+					// Create temp zip file
+					$zip = new ZipArchive;
+					$temp = tempnam(sys_get_temp_dir(), 'zip');
+					$zip->open($temp);
+					
+					// Add files
+					foreach($files as $file) {
+						$zip->addFromString($file, file_get_contents($file));
+						$zip->addFile($file);
+					}
+					
+					// Write temp file
+					$zip->close();
+					
+					// Stream file to browser
+					header('Content-Description: File Transfer');
+					header('Content-Type: application/octet-stream');
+					header('Content-Disposition: attachment; filename=myFile.zip');
+					header('Content-Transfer-Encoding: binary');
+					header('Expires: 0');
+					header('Cache-Control: must-revalidate');
+					header('Pragma: public');
+					header('Content-Length: ' . filesize($temp));
+					
+					readfile($temp);
+					
+					unlink($temp);
+				}
+
+				function zip_files($files = array()) {
+					echo "<script type='text/javascript'>console.log('$files');</script>";
+					# create new zip object
+					$zip = new ZipArchive();
+					
+					# create a temp file & open it
+					$tmp_file = tempnam('.', '');
+					$zip->open($tmp_file, ZipArchive::CREATE);
+					
+					# loop through each file
+					foreach ($files as $file) {
+						echo "<script type='text/javascript'>console.log('add $file');</script>";
+						# download file
+						$download_file = file_get_contents($file);
+						echo "<script type='text/javascript'>console.log('download $download_file');</script>";
+					
+						#add it to the zip
+						$zip->addFromString(basename($file), $download_file);
+					}
+					
+					# close zip
+					$zip->close();
+					
+					# send the file to the browser as a download
+					header('Content-disposition: attachment; filename="archive.zip"');
+					header('Content-type: application/zip');
+					readfile($tmp_file);
+					unlink($tmp_file);
+				}
+				function create_zip($files = array(),$destination = '',$overwrite = false) {
+					echo $files;
+					echo print_r($files);
+					echo "<script type='text/javascript'>console.log('$files');</script>";
+					//if the zip file already exists and overwrite is false, return false
+					if(file_exists($destination) && !$overwrite) { 
+						return false; }
+					//vars
+					$valid_files = array();
+					//if files were passed in...
+					if(is_array($files)) {
+						echo "<script type='text/javascript'>console.log('is array');</script>";
+						//cycle through each file
+						foreach($files as $file) {
+							//make sure the file exists
+							if(file_exists($file)) {
+								echo "<script type='text/javascript'>console.log('exists $file');</script>";
+								$valid_files[] = $file;
+							}
+						}
+					}
+
+					$count = count($valid_files);
+					echo "<script type='text/javascript'>console.log('$count');</script>";
+					//if we have good files...
+					if(count($valid_files)) {
+						//create the archive
+						$zip = new ZipArchive();
+						if($zip->open($destination,$overwrite ? ZIPARCHIVE::OVERWRITE : ZIPARCHIVE::CREATE) !== true) {
+							echo "<script type='text/javascript'>console.log('zip open fail');</script>";
+							return false;
+						}
+						//add the files
+						foreach($valid_files as $file) {
+							echo "<script type='text/javascript'>console.log('add $file');</script>";
+							$zip->addFile($file,$file);
+						}
+						//debug
+						echo 'The zip archive contains ',$zip->numFiles,' files with a status of ',$zip->status;
+						echo "<script type='text/javascript'>console.log('The zip archive contains $zip->numFiles files with a status of $zip->status');</script>";
+						
+						//close the zip -- done!
+						$zip->close();
+						
+						//check to make sure the file exists
+						return file_exists($destination);
+					}
+					else
+					{
+						return false;
+					}
+				}
+
+				function zip_download($files = array()) {
+					$zip = new ZipArchive();
+					$filename = "files.zip";
+					
+					echo "<script type='text/javascript'>alert('here');</script>";
+					if ($zip->open($filename, ZipArchive::CREATE)!==TRUE) {
+						echo "<script type='text/javascript'>alert('no open');</script>";
+						exit("cannot open <$filename>\n");
+					}
+
+					foreach($files as $file) {
+						echo "<script type='text/javascript'>alert('$file');</script>";
+						$zip->addFile($file);
+					}
+
+					echo "numfiles: " . $zip->numFiles . "\n";
+					echo "status:" . $zip->status . "\n";
+					echo "<script type='text/javascript'>console.log('numFiles $zip->numFiles');</script>";
+					echo "<script type='text/javascript'>console.log('status $zip->status');</script>";
+					$zip->close();
+					header('Content-disposition: attachment; filename=files.zip');
+					header('Content-type: application/zip');
+					readfile($filename);
+				}
+				/*
+				if (isset($_REQUEST['download'])) {
+					$files_to_zip = array();
+					foreach($_POST['check_list'] as $checkbox) {
+						$file_location = ContentUrlToLocalPath($checkbox);
+						//echo "<script type='text/javascript'>console.log('$file_location');</script>";
+						//echo "<script type='text/javascript'>alert('$checkbox');</script>";
+						array_push($files_to_zip, $file_location);
+					}
+					//echo $files_to_zip;
+					//echo print_r($files_to_zip);
+					//echo "<script type='text/javascript'>alert('$files_to_zip');</script>";
+					//isset($_POST['checkList'][$report_id]
+					//if true, good; if false, zip creation failed
+					//$result = create_zip($files_to_zip,'my-archive.zip');
+					//$result = zip_files($files_to_zip);
+					//$result = zip_images($files_to_zip);
+					$result = zip_download($files_to_zip);
+					echo "<script type='text/javascript'>alert('RESULT - $result');</script>";
+				}*/
+				?>
+
+					<div class="posts posts-wrap <?php echo esc_attr($wrap_class) ?> <?php echo $logancee_options['blog-article_list_template']; ?> <?php if($logancee_options['blog-article_list_template'] == 'grid' || $logancee_options['blog-article_list_template'] == 'grid_3_columns'): ?> posts-grid <?php endif; ?> <?php if($logancee_options['blog-article_list_template'] == 'grid_3_columns'): ?> posts-3-columns-grid <?php endif; ?> clearfix">
+						<?php echo do_shortcode('[categoryposts]'); ?>
+					</div>
+				</div>
+		</div><!-- container -->
+		<div class="press-hub-sign-up container">
+			<?php while ( have_posts() ) : the_post(); ?>
+
+					<?php get_template_part( 'template-parts/content', 'page' ); ?>
+
+					<?php
+						// If comments are open or we have at least one comment, load up the comment template.
+						if ( comments_open() || get_comments_number() ) :
+							comments_template();
+						endif;
+					?>
+
+				<?php endwhile; // End of the loop. ?>
+		</div>
+	</div><!-- #primary -->
+
+<script type="text/javascript" src="http://www.instax.co.uk//wp-content/themes/Instax/js/jszip.min.js"></script>
+<script type="text/javascript" src="http://www.instax.co.uk//wp-content/themes/Instax/js/jszip-utils.min.js"></script>
+<script>
+$(function () {
+	$('.download-button').click(function () {
+		var urls = [];
+		$(this).find(":checked").each(function () {
+			var $this = $(this);
+			var url = $this.val();
+			urls.push(url);
+		});
+		console.log(urls);
+
+		if (urls.length < 1) {
+			return false;
+		}
+		
+		var zip = new JSZip();
+		var count = 0;
+		var zipFilename = "zipFilename.zip";
+		
+		urls.forEach(function(url){
+		var filename = "filename";
+		// loading a file and add it in a zip file
+		JSZipUtils.getBinaryContent(url, function (err, data) {
+			if(err) {
+				throw err; // or handle the error
+			}
+			zip.file(filename, data, {binary:true});
+			count++;
+			if (count == urls.length) {
+			var zipFile = zip.generate({type: "blob"});
+			saveAs(zipFile, zipFilename);
+			}
+		});
+		});
+	});
+});
+</script>
+
+<?php get_footer(); ?>
