@@ -3604,6 +3604,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
 add_action( 'wp_head', 'ns_google_tag_manager_head', 10 );
 
+/*
 function ns_google_analytics() { ?>
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-145684397-1"></script>
@@ -3618,7 +3619,7 @@ function ns_google_analytics() { ?>
   }
   
 add_action( 'wp_head', 'ns_google_analytics', 10 );
-
+*/
 
 function ns_facebook_pixel() { ?>
 <!-- Facebook Pixel Code -->
