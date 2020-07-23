@@ -3646,7 +3646,36 @@ add_action( 'wp_head', 'ns_facebook_pixel', 10 );
 <?php
 add_action( 'wp_footer', 'custom_popup_js', 1000 );
 function custom_popup_js() { ?>
-    <script type="text/javascript">
+    <script type="text/javascript">   
+        // Open the Modal
+        function openModal(myElement) {
+            jQuery("#"+myElement).css("display","block");
+        }
+        // Close the Modal
+        function closeModal(isVideo) {
+            (function($) {
+                $(".modal").css("display","none");
+                if(isVideo){  
+                    $('.resp-iframe').each(function(){
+                        this.src = this.src;
+                    });       
+                }
+            })( jQuery );
+        }
+        //onclick for video opener
+        (function ($, document) {
+            $(document).ready(function () {
+                $(".modal-opener").click(function(){
+                    if( $(this).data('id') != undefined ){
+                        openModal($(this).data('id'));
+                    } else {
+                        openModal("myModal-"+$(this).attr('id'));
+                    }
+                    return false;
+                });
+            });
+        }(jQuery, document));
+        //open modal when hash is found
         (function ($, document) {
             $(document).ready(function () {
                 var hash = window.location.hash,

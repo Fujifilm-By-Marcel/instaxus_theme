@@ -21,6 +21,24 @@
 		?>
 	</div><!-- .entry-content -->
 
+	<?php 
+	if( have_rows('modals') ):
+	while( have_rows('modals') ):	
+	the_row();	
+	?>
+	<div id="myModal-<?php echo the_sub_field('modal_id') ?>" class="modal">
+	    <div class="modal-content">
+	        <div class="close" onclick="closeModal(true)">
+	            <span class="cursor">&times;</span>
+	        </div>
+	        <div class="wtb-iframe"><iframe src="<?php the_sub_field('iframe_src') ?>" frameborder="0" scrolling="no"></iframe></div>
+	    </div>
+	</div>
+	<?php 
+	endwhile;
+	endif;		
+	?>
+
 	<footer class="entry-footer">
 		<?php
 			edit_post_link(

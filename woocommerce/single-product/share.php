@@ -34,24 +34,58 @@ if ( ! $post->post_excerpt ) {
 }
 
 ?>
+
+
 <h2 class="product-name mobile-only"><?php the_title(); ?></h2>
 <div itemprop="description" class="description mobile-only desc std">
+    <div class="shortcode shortcode-custom_block ">
+        <?php 
+        $i = 0;
+        if( have_rows('top_video_buttons') ):
+        while( have_rows('top_video_buttons') ):    
+        the_row();  
+        $i++;
+        ?>
+        <div class="vc_row wpb_row vc_row-fluid">
+            <div class="video_popup_trigger_wrap wpb_column vc_column_container vc_col-sm-12">
+                <div class="vc_column-inner">
+                    <div class="wpb_wrapper">
+                        <div class="wpb_text_column wpb_content_element ">
+                            <div class="wpb_wrapper">
+                                <div id="watch-video">
+                                    <span class="modal-opener pum-trigger" data-do-default="" style="cursor: pointer;" data-id="myModal-topVideo-<?php echo $i ?>"><?php the_sub_field('button_text'); ?></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="vc_row wpb_row vc_row-fluid"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner"><div class="wpb_wrapper"><div class="vc_empty_space" style="height: 18px"><span class="vc_empty_space_inner"></span></div></div></div></div></div>
+        <?php 
+        endwhile;
+        endif;      
+        ?>
+    </div>
 	<?php echo apply_filters( 'woocommerce_short_description', $post->post_excerpt ) ?>
 </div>
 
+
 <div class="below-variants">
 <div class="col-md-12"> 
-    <?php 
-    if( get_field('wtb_class') != "" ){
-        $buynowid = strtolower(str_replace(' ', '', get_field('wtb_class')));
-    }
-    else{
-        $buynowid = strtolower(str_replace(' ', '', get_the_title('', '', false)));
-    }
-    ?>
+            <?php if( get_field('buy_now_text') != "" && get_field('buy_now_iframe_src') != "" ): ?>
             <div class="col-md-4 nopadding">
-                <a href="#" id="buy-now" class="vc_general vc_btn3 vc_btn3-size-md vc_btn3-shape-square blue-cta wtb-pop-up-buynowid-<?php echo $buynowid; ?>">BUY NOW</a>
+                <a href="#" id="buy-now" class="modal-opener vc_general vc_btn3 vc_btn3-size-md vc_btn3-shape-square blue-cta" data-id="myModal-buynow"><?php the_field('buy_now_text'); ?></a>
+            </div>            
+            <div id="myModal-buynow" class="modal">
+                <div class="modal-content">
+                    <div class="close" onclick="closeModal()">
+                        <span class="cursor">&times;</span>
+                    </div>
+                    <div class="wtb-iframe"><iframe src="<?php the_field('buy_now_iframe_src') ?>" frameborder="0" scrolling="no"></iframe></div>
+                </div>
             </div>
+            <?php endif ?>
             <div class="row">
                 <div class="custom-socials-block">
 					<style>
@@ -60,9 +94,6 @@ if ( ! $post->post_excerpt ) {
 							.spread-the-word{text-align:center;}
 						}
 					</style>
-                    <!--<div class="col-md-12">
-                        <p class="spread-the-word">Spread the word</p>
-                    </div>-->
                     <div class="col-md-12">
                         <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Single post sidebar") ) : ?>
                         <?php endif;?>
