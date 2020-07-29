@@ -3634,6 +3634,7 @@ function ns_facebook_pixel() { ?>
   'https://connect.facebook.net/en_US/fbevents.js');
   fbq('init', '957675440961709');
   fbq('track', 'PageView');
+  fbq('dataProcessingOptions', ['LDU'], 0, 0);
 </script>
 <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=957675440961709&ev=PageView&noscript=1"
