@@ -21,7 +21,7 @@ $logancee_options = logancee_get_options();?>
      <meta name="p:domain_verify" content="87b814615fa3ed39c584762384daeaaf"/>
      <link rel="profile" href="http://gmpg.org/xfn/11">
      <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-     <link rel="stylesheet" href="/wp-content/themes/Instax/css/main.min.css?v=1.0.1">
+     <link rel="stylesheet" href="/wp-content/themes/Instax/css/main.min.css?v=1.0.2">
      <?php if($logancee_options['layout-favicon']['url'] && (! function_exists( 'has_site_icon' ) || ! has_site_icon())): ?>
      <link rel="shortcut icon" href="<?php echo esc_url($logancee_options['layout-favicon']['url']); ?>" type="image/x-icon" />
      <?php endif; ?>
