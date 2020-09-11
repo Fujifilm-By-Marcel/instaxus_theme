@@ -202,9 +202,14 @@ function save_post_if_submitted() {
 		//register adestra
 		require_once('adestra-api/adestra-api.php');
 		$xmlrpc = authenticate();
+
 		if( isset($_POST['mailing']) ){
 			$contactID = createContact($xmlrpc, $firstname, $lastname, $email, $camera, $instagram, $twitter, $dob);
-			subscribeContact($xmlrpc, $contactID, 3835);
+			if (get_current_blog_id() == 1) {				
+				subscribeContact($xmlrpc, $contactID, 3835);
+			} else {
+				subscribeContact($xmlrpc, $contactID, 91143);
+			}
 		}		
 		
 		$formsuccess = true;
