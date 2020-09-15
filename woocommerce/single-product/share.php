@@ -86,6 +86,9 @@ if ( ! $post->post_excerpt ) {
                 </div>
             </div>
             <?php endif ?>
+            <?php if( get_field('buy_now_alternate_text') ){  ?>
+            <p><?php the_field('buy_now_alternate_text'); ?></p>            
+            <?php } ?>
             <div class="row">
                 <div class="custom-socials-block">
 					<style>
