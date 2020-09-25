@@ -3193,6 +3193,15 @@ if ( function_exists('register_sidebar') )
 );
 if ( function_exists('register_sidebar') )
   register_sidebar(array(
+    'name' => 'Footer copyright',
+    'before_widget' => '<div class="footer-logo">',
+    'after_widget' => '</div>',
+    'before_title' => '<h3>',
+    'after_title' => '</h3>',
+  )
+);
+if ( function_exists('register_sidebar') )
+  register_sidebar(array(
     'name' => 'Single post sidebar',
     'before_widget' => '<div class = "singlepostsidebar">',
     'after_widget' => '</div>',
@@ -3590,7 +3599,7 @@ function mytheme_comment($comment, $args, $depth) {
 
 
 
-
+/*
 function ns_google_tag_manager_head() { ?>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -3603,7 +3612,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   
 add_action( 'wp_head', 'ns_google_tag_manager_head', 10 );
-
+*/
 /*
 function ns_google_analytics() { ?>
 		<!-- Global site tag (gtag.js) - Google Analytics -->
@@ -3620,7 +3629,7 @@ function ns_google_analytics() { ?>
   
 add_action( 'wp_head', 'ns_google_analytics', 10 );
 */
-
+/*
 function ns_facebook_pixel() { ?>
 <!-- Facebook Pixel Code -->
 <script>
@@ -3643,6 +3652,7 @@ function ns_facebook_pixel() { ?>
   <?php
   }  
 add_action( 'wp_head', 'ns_facebook_pixel', 10 );
+*/
 ?>
 <?php
 add_action( 'wp_footer', 'custom_popup_js', 1000 );

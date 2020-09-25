@@ -44,10 +44,8 @@
             <a href="https://www.pinterest.com/INSTAXamericas/" target="_blank"><img src="/wp-content/themes/Instax/images/pinterest-icon.png" alt="Instax Pinterest"></a>
             <a href="https://www.youtube.com/channel/UCCdyBNOeDzw7C0QOZQVoGQA" target="_blank"><img src="/wp-content/themes/Instax/images/youtube-icon.png" alt="Instax Youtube"></a>
             </div>
-            <div class="footer-logo">
-                <img src="/wp-content/uploads/2017/07/fujifilm.png" alt="Fujifilm Logo"/>
-                <p>&copy; <?php echo date('Y'); ?>  FUJIFILM North America Corporation</p>
-            </div>
+            <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Footer copyright") ) : ?>    
+            <?php endif;?>
         </div>
     </div>
 </div>
@@ -69,10 +67,8 @@
             <?php endif;?>
         </div>
         <div class="col-xs-12 text-right">
-            <div class="footer-logo">
-                <img src="/wp-content/uploads/2017/07/fujifilm.png" alt="Fujifilm Logo"/>
-                <p>&copy; <?php echo date('Y'); ?>  FUJIFILM North America Corporation</p>
-            </div>
+            <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Footer copyright") ) : ?>    
+            <?php endif;?>
         </div>
     </div>
 </div>
