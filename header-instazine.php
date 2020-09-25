@@ -36,10 +36,8 @@ $logancee_options = logancee_get_options();
 </head>
 
 <body <?php body_class(logancee_get_body_class()); ?>>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TKDLHLM"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+
+<?php if ( function_exists( 'gtm4wp_the_gtm_tag' ) ) { gtm4wp_the_gtm_tag(); } ?>
 
 <?php
     // Get Meta Values
