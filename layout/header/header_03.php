@@ -78,6 +78,7 @@
 
 <?php endif; ?>
 
+                               
 <header class="header header-layout-3">
     <div class="background-header"></div>
     <div class="slider-header">
@@ -139,6 +140,29 @@
                                 </div>
 								
                             </div>
+                            <div align="right">
+                                    <?php if ( 4 == get_current_blog_id() ) {
+                                        echo '<div class="utility">
+
+                                            <div id="languageSelector">
+                        
+                                                <div class="selectList OneLinkHide">
+                                                    <ul>
+                                                        <li class="stay" >English</li>                                     
+                                                        <li><a href="http://fr.instaxcanada.ca/index.html">Français</a></li>
+                                                    </ul>
+                                                </div>
+                                
+                                                <div class="selectList OneLinkShow OneLinkKeepLinks">
+                                                    <ul>
+                                                        <li><a href="http://www.instaxcanada.ca/index.html">English</a></li>                                        
+                                                        <li class="stay">Français</li>                                        
+                                                    </ul>
+                                                </div>        
+                                            </div> 
+                                            </div>';
+                                    } ?>
+                                </div>
                             <div class="sticky-header is-sticky desktop-header always-show">
                                 <div class="logo-sticky">
 
@@ -171,7 +195,6 @@
                                     <div class="sticky-cart">
                                         <?php echo logancee_html_minicart(); ?>
                                     </div>
-
                                     <div class="settings">
                                         <i class="icon-settings"></i>
                                         <div class="settings-inner">
@@ -198,7 +221,6 @@
 
                                 <div class="main-menu">
                                     <?php echo logancee_html_mainmenu() ?><!-- // .megamenu-wrapper -->
-                                   
                                 </div> 
                             </div>
                         </div>
