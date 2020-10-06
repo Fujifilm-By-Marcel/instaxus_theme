@@ -1,10 +1,10 @@
 <!-- HEADER
 ================================================== -->
+
 <?php $logancee_options = logancee_get_options();?>
 
 <?php if($logancee_options['header-sticky-status']):?>
 
-   
 
     <div class="sticky-header is-sticky hide-until-fixed">
         <div class="wrap">
@@ -149,13 +149,13 @@
                                                 <div class="selectList OneLinkHide">
                                                     <ul>
                                                         <li class="stay" >English</li>                                     
-                                                        <li><a href="http://fr.instaxcanada.ca/index.html">Français</a></li>
+                                                        <li><a href="https://fr.instaxcanada.ca/">Français</a></li>
                                                     </ul>
                                                 </div>
                                 
                                                 <div class="selectList OneLinkShow OneLinkKeepLinks">
                                                     <ul>
-                                                        <li><a href="http://www.instaxcanada.ca/index.html">English</a></li>                                        
+                                                        <li><a href="https://www.instaxcanada.ca/">English</a></li>                                      
                                                         <li class="stay">Français</li>                                        
                                                     </ul>
                                                 </div>        
