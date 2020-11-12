@@ -3746,3 +3746,35 @@ $urls = array_diff( $urls, array( $emoji_svg_url ) );
 
 return $urls;
 }
+function load_cookieconsent_assets(){
+    wp_enqueue_style('cookie-consent', get_stylesheet_directory_uri().'/fnac/cookie-consent/cookieconsent.min.css', false, NULL, 'all');
+    wp_enqueue_script('uscommon', get_stylesheet_directory_uri().'/fnac/cookie-consent/cookieconsent.min.js', array(), '1.0.1', true);
+} 
+add_action( 'wp_enqueue_scripts', 'load_cookieconsent_assets' );
+
+add_action( 'wp_print_footer_scripts', 'cookieconsent_init');
+function cookieconsent_init() { ?>
+    <script type="text/javascript">
+    window.addEventListener("load", function(){
+        window.cookieconsent.initialise({
+            "palette": {
+                "popup": {
+                    "background": "#464c50",
+                    "text": "#ffffff"
+                },
+                "button": {
+                    "background": "#04cbf4",
+                    "text": "#ffffff"
+                }
+            },
+            "theme": "block",
+            "type": "informational",
+            "content": {
+                message: '<span id="cookieconsent:desc" class="cc-message">Cookies are important to the proper functioning of a site. To improve your experience, we use cookies to collect statistics to optimise site functionality, and deliver content tailored to your interest.<br> By continuing to use this website site you are giving us your consent to do this. For more information you can read our</span>',
+                link: 'Privacy Policy',
+                href: '/privacy-policy'
+            }
+        });
+    });
+    </script><?php
+}
