@@ -75,44 +75,7 @@
 
 <a href="#" class="scrollup"><i class="fa fa-angle-up"></i></a>
 
-<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
-
-<script src="/wp-content/themes/Instax/js/noframework.waypoints.min.js"></script>
-<script ></script>
-<script type="text/javascript">
-    /*
-	var waypoint = new Waypoint({
-        element: document.getElementById('gifWrap'),
-        handler: function(direction) {
-            document.getElementById("gifWrap").className = "gifWrap visible slideInRight animated slower";
-        }, offset: '50%'
-    })
-	*/
-</script>
-<script>
-window.addEventListener("load", function(){
-	window.cookieconsent.initialise({
-		"palette": {
-			"popup": {
-				"background": "#464c50",
-				"text": "#ffffff"
-			},
-			"button": {
-				"background": "#04cbf4",
-				"text": "#ffffff"
-			}
-		},
-		"theme": "block",
-		"type": "informational",
-		"content": {
-			message: '<span id="cookieconsent:desc" class="cc-message">Cookies are important to the proper functioning of a site. To improve your experience, we use cookies to collect statistics to optimise site functionality, and deliver content tailored to your interest.<br> By continuing to use this website site you are giving us your consent to do this. For more information you can read our</span>',
-			link: 'Privacy Policy',
-			href: '/privacy-policy'
-		}
-	});
-});
-</script>     
+<!--<script src="/wp-content/themes/Instax/js/noframework.waypoints.min.js"></script>-->
 <?php wp_footer(); ?>
 </body>
 </html>
