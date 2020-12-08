@@ -49,7 +49,7 @@ $logancee_options = logancee_get_options();
 ?>
 
 <?php
-
+/*
 $countrycode = ip_info("Visitor", "Country Code"); 
 
 // Irish users on the UK site
@@ -73,7 +73,7 @@ if ($countrycode == 'IE') { // Is this the users country code?
             </div>'; 
     } 
 } 
-
+*/
 ?>
 
 
