@@ -31,7 +31,7 @@
 	        <div class="close" onclick="closeModal(true)">
 	            <span class="cursor">&times;</span>
 	        </div>
-	        <div class="wtb-iframe"><iframe src="<?php the_sub_field('iframe_src') ?>" frameborder="0" scrolling="no"></iframe></div>
+	        <div class="wtb-iframe"><iframe loading="lazy" src="<?php the_sub_field('iframe_src') ?>" frameborder="0" scrolling="no"></iframe></div>
 	    </div>
 	</div>
 	<?php 

@@ -204,7 +204,7 @@ get_header(); ?>
 			<?php while( have_rows('video') ): the_row(); ?>
 			<div class="col-12 col-md-8 col-lg-6 col-md-push-2 col-lg-push-0 text-center">
 				
-				<div class="videoWrapper"><iframe title="<?php the_sub_field('title'); ?>" src="<?php the_sub_field('src'); ?>" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen=""></iframe></div>
+				<div class="videoWrapper"><iframe loading="lazy" title="<?php the_sub_field('title'); ?>" src="<?php the_sub_field('src'); ?>" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen=""></iframe></div>
 				
 			</div>
 			<?php endwhile; ?>

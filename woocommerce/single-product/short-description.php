@@ -74,7 +74,7 @@ $i++;
             <span class="cursor">&times;</span>
         </div>
         <div class="resp-container">
-        	<iframe class="resp-iframe" src="<?php the_sub_field('iframe_src') ?>" width="640" height="360" frameborder="0" allowfullscreen="true" allow="autoplay; fullscreen"></iframe>
+        	<iframe loading="lazy" class="resp-iframe" src="<?php the_sub_field('iframe_src') ?>" width="640" height="360" frameborder="0" allowfullscreen="true" allow="autoplay; fullscreen"></iframe>
     	</div>
     </div>
 </div>
