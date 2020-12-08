@@ -199,9 +199,9 @@
                                     </div>
                                 </div>
 
-                                <div class="sticky-cart">
-                                    <?php echo logancee_html_minicart(); ?>
-                                </div>
+                                <!--<div class="sticky-cart">
+                                    <?php //echo logancee_html_minicart(); ?>
+                                </div>-->
 
                                 <div class="settings">
                                     <i class="icon-settings"></i>

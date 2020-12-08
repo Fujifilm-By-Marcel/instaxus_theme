@@ -73,7 +73,7 @@
                         </div>
                     </div>
 
-                    <?php echo logancee_html_minicart(); ?>
+                    <?php //echo logancee_html_minicart(); ?>
 
                 </div>
             </div>

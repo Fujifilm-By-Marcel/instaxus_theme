@@ -22,7 +22,7 @@ define('logancee_version', $theme->get('Version'));
 
 
 // Get users country code 
-
+/*
 function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
     $output = NULL;
     if (filter_var($ip, FILTER_VALIDATE_IP) === FALSE) {
@@ -87,7 +87,7 @@ function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
     }
     return $output;
 }
-
+*/
 
 
 // Function for Content Type, ReduxFramework
@@ -1123,7 +1123,7 @@ function logancee_get_allowed_tags(){
 
 }
 
-function logancee_html_minicart() {
+/*function logancee_html_minicart() {
     global $woocommerce, $logancee_options;
 
 
@@ -1219,6 +1219,7 @@ function logancee_html_minicart() {
     
     return ob_get_clean();
 }
+*/
 
 function logancee_search_form() {
     if ( !class_exists( 'Woocommerce' ) ){
