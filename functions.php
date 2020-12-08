@@ -3267,7 +3267,7 @@ add_filter('pre_get_posts', 'filter_search');
 //[gdrive][/gdrive]
 
 function gdrive_shortcode( $atts, $content = null ) {
-	return '<iframe src="https://drive.google.com/embeddedfolderview?id=' . $content . '#grid" frameborder="0" width="100%" height="300px" scrolling="auto"></iframe>';
+	return '<iframe loading="lazy" src="https://drive.google.com/embeddedfolderview?id=' . $content . '#grid" frameborder="0" width="100%" height="300px" scrolling="auto"></iframe>';
 }
 add_shortcode( 'gdrive', 'gdrive_shortcode' );
 

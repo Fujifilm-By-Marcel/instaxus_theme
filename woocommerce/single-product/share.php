@@ -82,7 +82,7 @@ if ( ! $post->post_excerpt ) {
                     <div class="close" onclick="closeModal()">
                         <span class="cursor">&times;</span>
                     </div>
-                    <div class="wtb-iframe"><iframe src="<?php the_field('buy_now_iframe_src') ?>" frameborder="0" scrolling="no"></iframe></div>
+                    <div class="wtb-iframe"><iframe loading="lazy" src="<?php the_field('buy_now_iframe_src') ?>" frameborder="0" scrolling="no"></iframe></div>
                 </div>
             </div>
             <?php endif ?>

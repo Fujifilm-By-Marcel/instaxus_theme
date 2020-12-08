@@ -59,7 +59,7 @@
 							</div>
 							<div class="modal-body">
 								<div class="video-banner">
-									<iframe class="faq-video" width="560" height="315" src="https://www.youtube.com/embed/<?php the_sub_field('video_source'); ?>?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+									<iframe loading="lazy" class="faq-video" width="560" height="315" src="https://www.youtube.com/embed/<?php the_sub_field('video_source'); ?>?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 								</div>
 							</div>
 						</div>
