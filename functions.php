@@ -3779,3 +3779,11 @@ function cookieconsent_init() { ?>
     });
     </script><?php
 }
+function google_site_verification() { 
+    if( get_current_blog_id() == 1){
+    ?>
+    <meta name="google-site-verification" content="PTlsQfxOhZXDVoJwmvXSVlJ2ijFiFiDbzYVfN3abffA" />
+    <?php
+    }
+}  
+add_action( 'wp_head', 'google_site_verification', 10 );
