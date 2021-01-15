@@ -162,7 +162,7 @@ get_header('attachment'); ?>
 		display: inline;
 		font-weight:400;
 	}
-
+	.loader{display:none;}
 </style>
 
 <div class="loader">
