@@ -31,6 +31,8 @@ function save_post_if_submitted() {
     // Stop running function if form wasn't submitted
     if ( !isset($_POST['email']) ) {
         return $formsuccess;
+    } else {
+    	echo '<script>jQuery(".loader").show();</script>';
     }
 	
 	//sanitize vars	
@@ -76,7 +78,7 @@ function save_post_if_submitted() {
 	
     // Check that the nonce was set and valid
     if( !wp_verify_nonce($_POST['_wpnonce'], 'wps-frontend-post') ) {
-        array_push( $msg, 'Your form failed a security check.');        
+        array_push( $msg, 'Failed a security check.');        
     }
 
     // Do some minor form validation to make sure there is content
@@ -243,9 +245,8 @@ function save_post_if_submitted() {
 
 function outputGive10Form() {
     $success = save_post_if_submitted();
-	echo "<style>.loader{display:none;}</style>";
 	if(!$success){
-		
+	echo '<script>jQuery(".loader").hide();</script>';
 	$field_labels = get_sub_field("field_labels");
     ?>
 	
@@ -353,7 +354,7 @@ function outputGive10Form() {
 		
 		
 		<div class="input-container"> 	
-			<input class="submit-button" type="submit" value="<?php echo $field_labels['submit'] ?>" id="submit" name="submit" accept="image/*" />
+			<input class="submit-button" type="submit" value="<?php echo $field_labels['submit'] ?>" id="submitbtn" name="submitbtn" accept="image/*" />
 		</div>
 		
 		</form>
@@ -362,11 +363,13 @@ function outputGive10Form() {
 	<script>
 	
 
+	function recaptchaCallback() {
+	  jQuery('#hiddenRecaptcha').valid();
+	};
+
 	jQuery(document).ready(function( $ ) {
 		
-		function recaptchaCallback() {
-		  $('#hiddenRecaptcha').valid();
-		};
+		
 		
 		$.validator.addMethod("minAge", function(value, element, min) {
 			var today = new Date();
@@ -504,6 +507,7 @@ function outputGive10Form() {
             },
 			submitHandler: function(form) {
 				form.submit();
+				$(".loader").show();
 			},
 		});
 	});
