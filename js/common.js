@@ -45,7 +45,7 @@
     });
 
     var accords = jQuery('.accordion > dd'),
-	 accordsheading = jQuery('.accordion > dt');
+     accordsheading = jQuery('.accordion > dt');
 
     accords.hide();
 
@@ -70,12 +70,12 @@
     if($('#widget-facebook').length > 0){
         
         (function(d, s, id) {
-		  var js, fjs = d.getElementsByTagName(s)[0];
-		  if (d.getElementById(id)) return;
-		  js = d.createElement(s); js.id = id;
-		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-		  fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
         
         $(".facebook_right").hover(function() {            
             $(".facebook_right").stop(true, false).animate({right: "0"}, 800, 'easeOutQuint');        
@@ -521,7 +521,9 @@
         .click(function(event) {
         // On-page links
         if (
-            location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') 
+            this.pathname !== undefined &&
+            location.pathname.replace(/^\//, '') == 
+            this.pathname.replace(/^\//, '') 
             && 
             location.hostname == this.hostname
         ) {
@@ -652,7 +654,7 @@
         window.history.back();
     }
 
-    // Cart add remove functions	
+    // Cart add remove functions    
     window.cart = {
         'add': function(product_id, quantity) {
             $.ajax({
@@ -660,7 +662,7 @@
                 type: 'post',
                 data: 'product_id=' + product_id + '&quantity=' + (typeof(quantity) != 'undefined' ? quantity : 1),
                 dataType: 'json',
-                success: function(json) {			
+                success: function(json) {           
                     if (json['redirect']) {
                         window.location = json['redirect'];
                     }
@@ -724,9 +726,9 @@
                     } else {
                         $('#cart_block #cart_content').load('index.php?route=common/cart/info #cart_content_ajax');
                         $('#cart-total').html(json['total']);
-                    }			
+                    }           
                 }
-            });			
+            });         
         },
         'remove': function(key) {
                 var cart_id = key;
