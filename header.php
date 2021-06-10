@@ -133,7 +133,7 @@ $logancee_options = logancee_get_options();?>
             </div>
         <? }
 		 //ideas
-		 elseif ( 'ideas' == get_post_type() || is_singular( 'ideas' ) )  { 
+		 elseif ( 'ideas' == get_post_type() || is_singular( 'ideas' ) ||  'fnac_products' == get_post_type() || is_singular( 'fnac_products' ) )  { 
 			
 			
 			
