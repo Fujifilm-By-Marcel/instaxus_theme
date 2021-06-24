@@ -60,7 +60,7 @@ function printColorVariationSelector(){
 	if( have_rows('product_variations') ): $i = 0; ?>
 		<div class="color-variation-selectors">
 		<?php while( have_rows('product_variations') ) : the_row(); $i++; ?>
-			<div class="color-variation-selector" data-id="<?php echo $i ?>" style="background-color:<?php the_sub_field("color"); ?>"></div>
+			<div class="color-variation-selector" data-id="<?php echo $i ?>" style="background-color:<?php the_sub_field("color"); ?>" title="<?php the_sub_field("color_name"); ?>"></div>
 	    <?php endwhile; ?>
 	    </div>
 	<?php endif; 
@@ -115,6 +115,20 @@ function printColorVariationSelector(){
 }
 .owl-carousel{
 	margin-top:none;
+}
+
+
+@media screen and (max-width: 1000px){
+	.color-variation-selectors {
+	    display: flex;
+	    justify-content: center;
+	}
+	.below-variants .col-md-4{
+		width: 100%;
+	}
+	.product-name{
+		text-align: center !important;
+	}
 }
 </style>
 
