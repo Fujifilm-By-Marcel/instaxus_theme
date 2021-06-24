@@ -4,6 +4,7 @@ function page_my_scripts(){
 	wp_enqueue_style('owl-car', get_stylesheet_directory_uri().'/fnac/OwlCarousel2-2.3.4/assets/owl.carousel.min.css',array(),'1.0.0');	
 	wp_enqueue_style('owl-car-theme', get_stylesheet_directory_uri().'/fnac/OwlCarousel2-2.3.4/assets/owl.theme.default.css',array(),'1.0.0');	
 	wp_enqueue_script('owl-car-script', get_stylesheet_directory_uri().'/fnac/OwlCarousel2-2.3.4/owl.carousel.min.js', array(), '1.0.0', true);
+	wp_enqueue_script('lazyload', get_stylesheet_directory_uri().'/fnac/js/lazyload.js', array(), '1.31',true); 
 }
 add_action( 'wp_enqueue_scripts', 'page_my_scripts' );
 get_header();
@@ -39,7 +40,7 @@ function printVariationImages(){
 		$j++;
 		$image = $image['image'];
 		?>
-		<img style="<?php if($j!=1) echo "display:none;"; ?>" class="product-image" data-id="<?php echo $j; ?>" src="<?php echo $image['url'] ?>" alt="" width="<?php echo $image['width'] ?>" height="<?php echo $image['height'] ?>">
+		<img style="<?php if($j!=1) echo "display:none;"; ?>" class="product-image lazyload" data-id="<?php echo $j; ?>" data-src="<?php echo $image['url'] ?>" alt="" width="<?php echo $image['width'] ?>" height="<?php echo $image['height'] ?>">
 		<?php
 	}
 	echo "<div style='clear:both'></div>";
@@ -49,7 +50,7 @@ function printVariationImages(){
 		$j++;
 		$sizes = $image['image']['sizes'];
 		?>
-		<img style="max-width: min(60px,100%);display:inline-block;" class="product-thumb" data-id="<?php echo $j; ?>" src="<?php echo $sizes['thumbnail'] ?>" alt="" width="<?php echo $sizes['thumbnail-width'] ?>" height="<?php echo $sizes['thumbnail-height'] ?>">
+		<img  style="max-width: min(60px,100%);display:inline-block;" class="product-thumb lazyload" data-id="<?php echo $j; ?>" data-src="<?php echo $sizes['thumbnail'] ?>" alt="" width="<?php echo $sizes['thumbnail-width'] ?>" height="<?php echo $sizes['thumbnail-height'] ?>">
 		<?php
 	}
 	echo "</div>";
@@ -284,7 +285,11 @@ function printColorVariationSelector(){
     <?php endif; ?>
 </div>
 <script>
+
 	jQuery(document).ready(function( $ ) {
+		lazyload();	
+
+
 		$('.product-thumb').click(function(){
 			var variation = $($(this).closest('.product-variation'));
 			variation.find('.product-image').hide();
