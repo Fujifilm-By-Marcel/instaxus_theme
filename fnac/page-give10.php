@@ -338,7 +338,7 @@ jQuery(document).ready(function( $ ) {
 			verticallyCenter();
 	});
 
-	$(window).load(function(){
+	$(window).on('load', function(){
 			verticallyCenter();
 	});
 		

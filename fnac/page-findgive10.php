@@ -197,11 +197,11 @@ jQuery(document).ready(function( $ ) {
 		}		
 	}
 	
-	$(window).resize(function(){
+	$(window).on('load', function(){
 		clearLeft();
 	});
 
-	$(window).load(function(){
+	$(window).on('load', function(){
 		clearLeft();
 	});
 		
