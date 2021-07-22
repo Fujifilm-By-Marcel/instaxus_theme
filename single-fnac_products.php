@@ -130,6 +130,16 @@ function printColorVariationSelector(){
 		text-align: center !important;
 	}
 }
+
+.addtoany_share_save_container{
+	display: none;
+}
+
+.tab-content-area img{
+	height: auto;
+    max-width: 100%;
+}
+
 </style>
 
 
@@ -308,15 +318,14 @@ function printColorVariationSelector(){
 			var variation = $($(this).closest('.product-variation'));
 			variation.find('.product-image').hide();
 			variation.find('.product-image[data-id='+$(this).data('id')+']').css('display','block');
-			
-			
+			$(window).scrollTop(0);			
 		});	
 
 		$('.color-variation-selector').click(function(){
 			$('.product-variation').hide();
 			$('.product-images').find('.product-variation[data-id='+$(this).data('id')+']').css('display','block');
 			window.dispatchEvent(new Event('resize'));
-			
+			$(window).scrollTop(0);
 		});	
 
 
