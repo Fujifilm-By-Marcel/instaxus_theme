@@ -20,4 +20,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 ?>
-<h2 class="product-name desktop-only"><?php the_title(); ?></h2>
+<h1 class="product-name desktop-only"><?php the_title(); ?></h1>

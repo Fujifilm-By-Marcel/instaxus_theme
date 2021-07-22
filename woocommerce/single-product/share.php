@@ -36,7 +36,7 @@ if ( ! $post->post_excerpt ) {
 ?>
 
 
-<h2 class="product-name mobile-only"><?php the_title(); ?></h2>
+<h1 class="product-name mobile-only"><?php the_title(); ?></h1>
 <div itemprop="description" class="description mobile-only desc std">
     <div class="shortcode shortcode-custom_block ">
         <?php 
