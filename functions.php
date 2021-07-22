@@ -772,7 +772,7 @@ function logancee_print_inline_footer() {
     <?php if($logancee_options['product-quickview-status'] == 1) { ?>
     <script type="text/javascript">
         (function($) { 
-            $(window).load(function(){
+            $(window).on('load', function(){
                  $('.quickview a').magnificPopup({
                       preloader: true,
                       tLoading: '',

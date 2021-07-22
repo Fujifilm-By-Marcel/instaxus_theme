@@ -195,7 +195,7 @@ foreach ( $attachment_ids as $attachment_id ) {
                         } );
                     });
 
-                    $(window).load(function(){
+                    $(window).on('load', function(){
                         $('.popup-gallery a').prettyPhoto();
                         $('.thumbnails a, .thumbnails-carousel a').unbind('click.prettyphoto');
                         $('.thumbnails, .thumbnails-carousel').find('a[href="' + $('#ex1').attr('href') + '"]').attr('rel', '#')
