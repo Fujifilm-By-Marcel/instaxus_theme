@@ -3787,3 +3787,49 @@ function google_site_verification() {
     }
 }  
 add_action( 'wp_head', 'google_site_verification', 10 );
+
+//film carousel
+function my_carousel() { ?>
+    <?php if( have_rows('film_carousel') ) { ?>        
+        <div class="owl-carousel film-carousel owl-theme" style="display: none;">
+            <?php while( have_rows('film_carousel') ) : the_row(); ?>
+            <div class="item"><img style="width:auto;margin:auto;" src="<?php echo get_sub_field('image')['url'] ?>" alt="" width="<?php echo get_sub_field('image')['width'] ?>" height="<?php echo get_sub_field('image')['height'] ?>"></div>
+            <?php endwhile; ?>
+        </div>        
+        <script type="text/javascript">
+            jQuery(window).ready(function( $ ) {
+                $('.owl-carousel.film-carousel').owlCarousel({
+                    loop:true,
+                    margin:10,
+                    nav:false,
+                    autoplay:true,
+                    lazyLoad:true,
+                    responsive:{
+                        0:{
+                            items:1
+                        },
+                        600:{
+                            items:3
+                        },
+                        1000:{
+                            items:5
+                        }
+                    }
+                });
+                $('.owl-carousel.film-carousel').show();
+            });
+        </script>
+    <?php } 
+}
+add_shortcode( 'my_carousel', 'my_carousel' );
+
+
+
+function include_carousel_scripts(){
+    if( have_rows('film_carousel') ) { 
+        wp_enqueue_style('owl-car', get_stylesheet_directory_uri().'/fnac/OwlCarousel2-2.3.4/assets/owl.carousel.min.css',array(),'1.0.0'); 
+        wp_enqueue_style('owl-car-theme', get_stylesheet_directory_uri().'/fnac/OwlCarousel2-2.3.4/assets/owl.theme.default.css',array(),'1.0.0');  
+        wp_enqueue_script('owl-car-script', get_stylesheet_directory_uri().'/fnac/OwlCarousel2-2.3.4/owl.carousel.min.js', array(), '1.0.0', true);
+    }
+}
+add_action( 'wp_enqueue_scripts', 'include_carousel_scripts' );
