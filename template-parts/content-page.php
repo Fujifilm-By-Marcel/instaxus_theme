@@ -31,7 +31,15 @@
 	        <div class="close" onclick="closeModal(true)">
 	            <span class="cursor">&times;</span>
 	        </div>
-	        <div class="wtb-iframe"><iframe loading="lazy" src="<?php the_sub_field('iframe_src') ?>" frameborder="0" scrolling="no"></iframe></div>
+	        <?php if( get_current_blog_id() == 1 ){ ?>
+	        	<div class="wtb-iframe">
+	        		<iframe loading="lazy" data-src="<?php the_sub_field('iframe_src') ?>" frameborder="0" scrolling="no"></iframe>
+	        	</div>
+	        <?php } else { ?>
+	        	<div class="wtb-iframe">
+	        		<iframe loading="lazy" src="<?php the_sub_field('iframe_src') ?>" frameborder="0" scrolling="no"></iframe>
+	        	</div>
+	        <?php } ?>
 	    </div>
 	</div>
 	<?php 
