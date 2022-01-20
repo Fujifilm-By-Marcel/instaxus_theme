@@ -82,6 +82,10 @@ if ($t) {
     font-size: 15px;
     margin-bottom: 15px;
 }
+	h1 {
+    font-size: 30px !important;
+		margin-bottom: 0 !important;
+}
 
 .ideas_work__texts .tag {
 	font-size: 15px !important;
@@ -168,7 +172,7 @@ if ($t) {
 							echo "<a href='$tl'><p class='tag' style='color:$tc !important;background-color:$bc;'>$tn</p></a>";
 						}
 						?>
-						<h2 class="headline"><?php the_title() ?></h2>						
+						<h1 class="headline"><?php the_title() ?></h1>						
 						<?php if( $level_of_difficulty != "disabled" ){ ?>
 						<p class="level">Level of difficulty:
 							<?php 							
