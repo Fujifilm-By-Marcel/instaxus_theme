@@ -3788,6 +3788,37 @@ function google_site_verification() {
 }  
 add_action( 'wp_head', 'google_site_verification', 10 );
 
+function fb_pixel() {     
+    if(get_current_blog_id() == 1){
+      $fbid = 957675440961709;
+    } elseif (get_current_blog_id() == 4){
+      $fbid = 521279755958873;
+    } else {
+        $fbid = false;
+    }
+    if ( $fbid ) { 
+    ?>
+        <!-- Facebook Pixel Code -->
+        <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '<?php echo $fbid; ?>');
+        fbq('track', 'PageView');
+        </script>
+        <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=<?php echo $fbid; ?>&ev=PageView&noscript=1"
+        /></noscript>
+        <!-- End Facebook Pixel Code -->
+    <?php } 
+}  
+add_action( 'wp_head', 'fb_pixel', 10 );
+
 //film carousel
 function my_carousel() { ?>
     <?php if( have_rows('film_carousel') ) { ?>        

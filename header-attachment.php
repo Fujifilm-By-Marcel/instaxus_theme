@@ -13,9 +13,6 @@ $logancee_options = logancee_get_options();?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>  class="<?php echo esc_attr($logancee_options['layout-responsive']) == 1 ? 'responsive' : ''; ?> <?php echo logancee_get_active_skin(true); ?>">
 <head>
-<meta name="google-site-verification" content="NJh6IjFPXIEFgzvGKHEczqNWu3zvuYlCZ1RPeDroOQY" />
-
-
      <meta charset="<?php bloginfo( 'charset' ); ?>">
      <meta name="viewport" content="width=device-width, initial-scale=1">
      <meta name="p:domain_verify" content="87b814615fa3ed39c584762384daeaaf"/>
@@ -92,14 +89,7 @@ $logancee_options = logancee_get_options();?>
 	<div id="main" class="<?php if($logancee_options['layout-main'] == 2) { echo 'main-fixed'; } ?>">
 
 
-        <?php
-        switch($logancee_options['header-type']){
-      
-        default:
-            include get_template_directory() .'/layout/header/header_03.php';
-            break;
-        }
-		?>
+        <?php include get_template_directory() .'/layout/header/header_03.php'; ?>
 
 
         

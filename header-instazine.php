@@ -12,10 +12,6 @@
 $logancee_options = logancee_get_options();
 
 ?><!DOCTYPE html>
-<?php
-    $cookie_name = "Irish_Redirect";
-    $cookie_value = "Ignore";
-?>
 <html <?php language_attributes(); ?>  class="<?php echo esc_attr($logancee_options['layout-responsive']) == 1 ? 'responsive' : ''; ?> <?php echo logancee_get_active_skin(true); ?>">
 <head>
 
@@ -46,36 +42,6 @@ $logancee_options = logancee_get_options();
     $logancee_sidebar = logancee_sidebar();
 
 ?>
-
-<?php
-/*
-$countrycode = ip_info("Visitor", "Country Code"); 
-
-// Irish users on the UK site
-if ($countrycode == 'IE') { // Is this the users country code?
-
-    if(!isset($_COOKIE[$cookie_name])) { // is the cookie already set
-
-        setcookie( $cookie_name, $cookie_value, time() + (86400 * 30), "/" ); // if the user is in Ireland and there's no cookie, set the cookie and show the popup
-        
-        echo '<div class="redirect-overlay show">
-                <div class="redirect-popup">
-                    <img src="/wp-content/themes/Instax/images/ireland.jpg" class="country-flag"/>
-                    <p>Oooo... Did you know we have an Irish site, want to head there instead?</p>
-                    <div class="col-md-6">
-                        <a href="https://www.instax.ie/" class="buy-now-cta">YES MAKE IT SO!</a>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="buy-now-cta greyed-out-cta close-redirect">NO KEEP ME HERE!</div>
-                    </div>
-                </div>
-            </div>'; 
-    } 
-} 
-*/
-?>
-
-
 
 <?php if($logancee_options['widget-facebook-status']) { ?>
 <div id="widget-facebook" class="facebook_<?php if($logancee_options['widget-facebook-position'] == 1) { echo 'left'; } else { echo 'right'; } ?> hidden-xs hidden-sm">
@@ -124,14 +90,7 @@ if ($countrycode == 'IE') { // Is this the users country code?
     <div id="main" class="<?php if($logancee_options['layout-main'] == 2) { echo 'main-fixed'; } ?>">
 
 
-        <?php
-        switch($logancee_options['header-type']){
-      
-        default:
-            include get_template_directory() .'/layout/header/header_03.php';
-            break;
-        }
-        ?>
+        <?php include get_template_directory() .'/layout/header/header_03.php'; ?>
 
         <?php if(!is_front_page()):?>
         <!-- BREADCRUMB
