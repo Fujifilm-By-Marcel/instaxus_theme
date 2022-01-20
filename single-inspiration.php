@@ -169,8 +169,9 @@ if ($t) {
 						}
 						?>
 						<h2 class="headline"><?php the_title() ?></h2>						
+						<?php if( $level_of_difficulty != "disabled" ){ ?>
 						<p class="level">Level of difficulty:
-							<?php 
+							<?php 							
 							for ($i=0; $i<3; $i++){
 								if($level_of_difficulty>$i){
 									$dlc = "red";
@@ -179,9 +180,10 @@ if ($t) {
 									$dlc = "";
 								}
 								echo "<span class='$dlc'>★</span>";
-							}
+							}															
 							?>
 						</p>
+						<?php } ?>
 						<?php the_content(); ?>
 					</div>
 					
