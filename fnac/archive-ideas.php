@@ -457,8 +457,9 @@ ul.posts_list {
 							<div class="posts_list__discription" > 
 								<p><?php echo get_excerpt() ?></p>
 							</div>
+							<?php if( get_field("level_of_difficulty", $PID ) != "disabled" ){ ?>
 							<p class="posts_list__level">Level of difficulty:
-								<?php 
+								<?php 								
 								for ($i=0; $i<3; $i++){
 									if(get_field("level_of_difficulty", $PID )>$i){
 										$dlc = "red";
@@ -467,9 +468,10 @@ ul.posts_list {
 										$dlc = "";
 									}
 									echo "<span class='$dlc'>★</span>";
-								}
+								}								
 								?>
-							</p>							
+							</p>
+							<?php } ?>							
 						</a>						
 					</li>
 					<?php
