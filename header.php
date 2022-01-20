@@ -92,14 +92,7 @@ $logancee_options = logancee_get_options();?>
 	<div id="main" class="<?php if($logancee_options['layout-main'] == 2) { echo 'main-fixed'; } ?>">
 
 
-        <?php
-        switch($logancee_options['header-type']){
-      
-        default:
-            include get_template_directory() .'/layout/header/header_03.php';
-            break;
-        }
-		?>
+        <?php include get_template_directory() .'/layout/header/header_03.php'; ?>
 
         <?php if(!is_front_page()):?>
         <!-- BREADCRUMB
