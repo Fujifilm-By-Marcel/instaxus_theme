@@ -439,6 +439,7 @@ class Walker_Nav_Menu_Edit_Custom extends Walker_Nav_Menu  {
                         <?php echo "Don't show a link label"; ?>
                     </label>
                 </p>
+                <!--
                 <p class="description description-thin">
                     <label for="edit-menu-item-tip_label-<?php echo esc_attr($item_id); ?>">
                         <?php echo 'Tip Label'; ?><br />
@@ -562,7 +563,7 @@ class Walker_Nav_Menu_Edit_Custom extends Walker_Nav_Menu  {
                                data-name="menu-item-content_custom_block[<?php echo esc_attr($item_id); ?>]"
                                value="<?php echo esc_attr( $item->content_custom_block ); ?>" />
                     </label>
-                </p>
+                </p>-->
 
                 <?php
                 /* New fields insertion ends here */

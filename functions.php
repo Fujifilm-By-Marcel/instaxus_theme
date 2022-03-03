@@ -106,6 +106,7 @@ register_nav_menus( array(
     'top_nav' => esc_html__('Top Navigation', 'logancee'),
     'lang_switcher' => esc_html__('Lang Switcher', 'logancee'),
     'sidebar_menu' => esc_html__('Sidebar Menu', 'logancee'),
+    'menu-1' => esc_html__( 'Primary', 'logancee' ),
 ));
 
 function logancee_get_theme_menus(){
@@ -394,65 +395,65 @@ if ( ! function_exists( 'logancee_setup' ) ) :
  */
 function logancee_setup() {
 
-	/*
-	 * Add Redux Framework
-	 */
-	require get_template_directory() . '/admin/admin-init.php';
+    /*
+     * Add Redux Framework
+     */
+    require get_template_directory() . '/admin/admin-init.php';
 
 
-	// Add default posts and comments RSS feed links to head.
-	add_theme_support( 'automatic-feed-links' );
+    // Add default posts and comments RSS feed links to head.
+    add_theme_support( 'automatic-feed-links' );
 
-	/*
-	 * Let WordPress manage the document title.
-	 * By adding theme support, we declare that this theme does not use a
-	 * hard-coded title tag in the document head, and expect WordPress to
-	 * provide it for us.
-	 */
-	add_theme_support( 'title-tag' );
+    /*
+     * Let WordPress manage the document title.
+     * By adding theme support, we declare that this theme does not use a
+     * hard-coded title tag in the document head, and expect WordPress to
+     * provide it for us.
+     */
+    add_theme_support( 'title-tag' );
 
-	/*
-	 * Enable support for Post Thumbnails on posts and pages.
-	 *
-	 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
-	 */
-	add_theme_support( 'post-thumbnails' );
+    /*
+     * Enable support for Post Thumbnails on posts and pages.
+     *
+     * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+     */
+    add_theme_support( 'post-thumbnails' );
 
-	// This theme uses wp_nav_menu() in one location.
-	register_nav_menus( array(
-		'primary' => esc_html__( 'Primary Menu', 'logancee' ),
-	) );
+    // This theme uses wp_nav_menu() in one location.
+    register_nav_menus( array(
+        'primary' => esc_html__( 'Primary Menu', 'logancee' ),
+    ) );
 
-	/*
-	 * Switch default core markup for search form, comment form, and comments
-	 * to output valid HTML5.
-	 */
-	add_theme_support( 'html5', array(
-		'search-form',
-		'comment-form',
-		'comment-list',
-		'gallery',
-		'caption',
-	) );
+    /*
+     * Switch default core markup for search form, comment form, and comments
+     * to output valid HTML5.
+     */
+    add_theme_support( 'html5', array(
+        'search-form',
+        'comment-form',
+        'comment-list',
+        'gallery',
+        'caption',
+    ) );
 
-	/*
-	 * Enable support for Post Formats.
-	 * See https://developer.wordpress.org/themes/functionality/post-formats/
-	 */
-	add_theme_support( 'post-formats', array(
-		'aside',
-		'image',
-		'video',
-		'quote',
-		'link',
-	) );
+    /*
+     * Enable support for Post Formats.
+     * See https://developer.wordpress.org/themes/functionality/post-formats/
+     */
+    add_theme_support( 'post-formats', array(
+        'aside',
+        'image',
+        'video',
+        'quote',
+        'link',
+    ) );
 
 
     // Set up the WordPress core custom background feature.
-	add_theme_support( 'custom-background', apply_filters( 'logancee_custom_background_args', array(
-		'default-color' => 'ffffff',
-		'default-image' => '',
-	) ) ); 
+    add_theme_support( 'custom-background', apply_filters( 'logancee_custom_background_args', array(
+        'default-color' => 'ffffff',
+        'default-image' => '',
+    ) ) ); 
 }
 
 endif; // logancee_setup
@@ -537,7 +538,7 @@ require_once(get_template_directory() . '/inc/menu.php');
  */
 
 function logancee_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'logancee_content_width', 640 );
+    $GLOBALS['content_width'] = apply_filters( 'logancee_content_width', 640 );
 }
 add_action( 'after_setup_theme', 'logancee_content_width', 0 );
 
@@ -706,7 +707,8 @@ function logancee_css() {
     wp_enqueue_style( 'filter_product', logancee_sys_theme_css . '/filter_product.css' );
 
     // font-awesome styles
-    wp_enqueue_style( 'awesome', logancee_sys_theme_css . '/font-awesome.min.css' );
+    //wp_enqueue_style( 'awesome', logancee_sys_theme_css . '/font-awesome.min.css' );
+    wp_enqueue_style( 'awesome', logancee_sys_template_uri . '/fnac/fa/css/all.min.css' );
 
     // blog styles
     wp_enqueue_style( 'blog', logancee_sys_theme_css . '/blog/blog.css' );
@@ -737,6 +739,8 @@ function logancee_css() {
     // portfolio
     wp_enqueue_style( 'portfolio', logancee_sys_theme_css . '/portfolio.css' );
 
+    //main-menu
+    wp_enqueue_style( 'main-menu', logancee_sys_theme_css . '/main-menu.css' );
 
     if($logancee_options['layout-page-width'] == 1){
         wp_enqueue_style( 'wide-grid', logancee_sys_theme_css . '/wide-grid.css' );
@@ -815,9 +819,9 @@ if (!is_admin() && !in_array( $GLOBALS['pagenow'], array( 'wp-login.php', 'wp-re
     wp_enqueue_style( 'logancee-style', get_stylesheet_uri() );
 
 
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}    
+    if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+        wp_enqueue_script( 'comment-reply' );
+    }    
 
     // jquery.easing scripts
     wp_enqueue_script( 'jquery.easing', logancee_sys_theme_js.'/jquery.easing.1.3.js', array(), null, true);    
@@ -845,6 +849,9 @@ if (!is_admin() && !in_array( $GLOBALS['pagenow'], array( 'wp-login.php', 'wp-re
 
     // megamenu
     wp_enqueue_script( 'megamenu', logancee_sys_theme_js.'/megamenu.js', array(), null, true);
+
+    // megamenu
+    wp_enqueue_script( 'fnac_menu', logancee_sys_theme_js.'/fnac_menu.js', array(), null, true);
 
     // jquery.cookie
     wp_enqueue_script( 'jquery.cookie', logancee_sys_theme_js.'/jquery.cookie.js', array(), null, true);
@@ -3250,54 +3257,54 @@ add_filter('pre_get_posts', 'filter_search');
 
  /*   2014  PLUGIN_AUTHOR_NAME  (email : bionicteaching@gmail.com)
 
- 	This program is free software; you can redistribute it and/or modify
- 	it under the terms of the GNU General Public License, version 2, as 
- 	published by the Free Software Foundation.
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License, version 2, as 
+    published by the Free Software Foundation.
 
- 	This program is distributed in the hope that it will be useful,
- 	but WITHOUT ANY WARRANTY; without even the implied warranty of
- 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- 	GNU General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
- 	You should have received a copy of the GNU General Public License
- 	along with this program; if not, write to the Free Software
- 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
 //[gdrive][/gdrive]
 
 function gdrive_shortcode( $atts, $content = null ) {
-	return '<iframe loading="lazy" src="https://drive.google.com/embeddedfolderview?id=' . $content . '#grid" frameborder="0" width="100%" height="300px" scrolling="auto"></iframe>';
+    return '<iframe loading="lazy" src="https://drive.google.com/embeddedfolderview?id=' . $content . '#grid" frameborder="0" width="100%" height="300px" scrolling="auto"></iframe>';
 }
 add_shortcode( 'gdrive', 'gdrive_shortcode' );
 
 // Remove protected from title of password protected pages
 function the_title_trim($title) {
 
-	$title = attribute_escape($title);
+    $title = attribute_escape($title);
 
-	$findthese = array(
-		'#Protected:#'
-	);
+    $findthese = array(
+        '#Protected:#'
+    );
 
-	$replacewith = array(
-		'', // What to replace "Protected:" with
-		'' // What to replace "Private:" with
-	);
+    $replacewith = array(
+        '', // What to replace "Protected:" with
+        '' // What to replace "Private:" with
+    );
 
-	$title = preg_replace($findthese, $replacewith, $title);
-	return $title;
+    $title = preg_replace($findthese, $replacewith, $title);
+    return $title;
 }
 add_filter('the_title', 'the_title_trim');
 
 
 // remove instax theme menu from top admin bar
 function shapeSpace_remove_toolbar_menu() {
-	
-	global $wp_admin_bar;
-	
-	$wp_admin_bar->remove_menu('logancee_options_options');
-	
+    
+    global $wp_admin_bar;
+    
+    $wp_admin_bar->remove_menu('logancee_options_options');
+    
 }
 add_action('wp_before_admin_bar_render', 'shapeSpace_remove_toolbar_menu', 999);
 
@@ -3616,15 +3623,15 @@ add_action( 'wp_head', 'ns_google_tag_manager_head', 10 );
 */
 /*
 function ns_google_analytics() { ?>
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-145684397-1"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145684397-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
 
-		  gtag('config', 'UA-145684397-1');
-		</script>
+          gtag('config', 'UA-145684397-1');
+        </script>
   <?php
   }
   
@@ -3864,3 +3871,107 @@ function include_carousel_scripts(){
     }
 }
 add_action( 'wp_enqueue_scripts', 'include_carousel_scripts' );
+
+/**
+ * Custom walker class.
+ */
+class WPDocs_Walker_Nav_Menu extends Walker_Nav_Menu {
+ 
+    /**
+     * Starts the list before the elements are added.
+     *
+     * Adds classes to the unordered list sub-menus.
+     *
+     * @param string $output Passed by reference. Used to append additional content.
+     * @param int    $depth  Depth of menu item. Used for padding.
+     * @param array  $args   An array of arguments. @see wp_nav_menu()
+     */
+    function start_lvl( &$output, $depth = 0, $args = array() ) {
+        // Depth-dependent classes.
+        $indent = ( $depth > 0  ? str_repeat( "\t", $depth ) : '' ); // code indent
+        $display_depth = ( $depth + 1); // because it counts the first submenu as 0
+        $classes = array(
+            'sub-menu',
+            ( $display_depth % 2  ? 'menu-odd' : 'menu-even' ),
+            ( $display_depth >=2 ? 'sub-sub-menu' : '' ),
+            'menu-depth-' . $display_depth
+        );
+        $class_names = implode( ' ', $classes );
+ 
+        // Build HTML for output.
+        $output .= "\n" . $indent . '<ul class="' . $class_names . '">' . "\n";
+    }
+ 
+    /**
+     * Start the element output.
+     *
+     * Adds main/sub-classes to the list items and links.
+     *
+     * @param string $output Passed by reference. Used to append additional content.
+     * @param object $item   Menu item data object.
+     * @param int    $depth  Depth of menu item. Used for padding.
+     * @param array  $args   An array of arguments. @see wp_nav_menu()
+     * @param int    $id     Current item ID.
+     */
+    function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+        global $wp_query;
+        $indent = ( $depth > 0 ? str_repeat( "\t", $depth ) : '' ); // code indent
+ 
+        // Depth-dependent classes.
+        $depth_classes = array(
+            ( $depth == 0 ? 'main-menu-item' : 'sub-menu-item' ),
+            ( $depth >=2 ? 'sub-sub-menu-item' : '' ),
+            ( $depth % 2 ? 'menu-item-odd' : 'menu-item-even' ),
+            'menu-item-depth-' . $depth
+        );
+        $depth_class_names = esc_attr( implode( ' ', $depth_classes ) );
+ 
+        // Passed classes.
+        $classes = empty( $item->classes ) ? array() : (array) $item->classes;
+        $class_names = esc_attr( implode( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item ) ) );
+ 
+        // Build HTML.
+        $output .= $indent . '<li id="nav-menu-item-'. $item->ID . '" class="' . $depth_class_names . ' ' . $class_names . '">';
+        //echo "<pre>";
+        //print_r($item);
+        //echo "</pre>";
+
+        
+        
+        if (strpos($class_names, 'menu-item-has-children') !== false) {
+            $children_icon = '<i class="fa-solid fa-angle-down"></i>';
+        } else {
+            $children_icon = '';
+        }
+
+        if($item->menu_item_parent > 0){        
+            $thumbnail = get_the_post_thumbnail($item->object_id,'thumbnail');            
+        } else {
+            $thumbnail = "";
+        }
+
+        
+ 
+        // Link attributes.
+        $attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
+        $attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';
+        $attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
+        $attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
+        $attributes .= ' class="menu-link ' . ( $depth > 0 ? 'sub-menu-link' : 'main-menu-link' ) . '"';
+    
+        
+
+        // Build HTML output and pass through the proper filter.
+        $item_output = sprintf( '%1$s<a%2$s>%3$s%4$s%5$s%6$s</a>%7$s',
+            $args->before,
+            $attributes,
+            $args->link_before,
+            $thumbnail,
+            apply_filters( 'the_title', $item->title, $item->ID ),
+            $children_icon,
+            $args->link_after,
+            $args->after
+        );
+        $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
+    }
+}
