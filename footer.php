@@ -24,6 +24,7 @@
 <?php endif; ?>
 <!-- // sign up block -->
 <!-- Instax FOOTER ================================================== -->
+<div id="socials-block"></div>
 <div class="footer-wrapper desktop-footer">
     <div class="footer-contain container">
         <div class="col-md-6">
@@ -36,8 +37,8 @@
                 <?php endif;?>
             </div>
         </div>
-        <div class="col-md-6 text-right">
-            <div class="socials">
+        <div class="col-md-6">
+            <div class="socials text-right">
             <a href="https://twitter.com/Instax" target="_blank"><img src="/wp-content/themes/Instax/images/twitter-icon.png" alt="Instax Twitter"></a>
             <a href="https://www.instagram.com/fujifilm_instax_northamerica/" target="_blank"><img src="/wp-content/themes/Instax/images/instagram-icon.png" alt="Instax Instagram"></a>
             <a href="https://www.facebook.com/FUJIFILM.INSTAX/" target="_blank"><img src="/wp-content/themes/Instax/images/facebook-icon.png" alt="Instax Facebook"></a>
@@ -51,12 +52,12 @@
 </div>
 <div class="footer-wrapper mobile-footer">
     <div class="footer-contain">
-        <div class="socials">
-            <a target="_blank" href="https://twitter.com/instaxHQ"><img src="/wp-content/themes/Instax/images/twitter-icon.png" alt="Instax Twitter"></a>
-            <a target="_blank" href="https://www.instagram.com/instaxhq/"><img src="/wp-content/themes/Instax/images/instagram-icon.png" alt="Instax Instagram"></a>
-            <a target="_blank" href="https://www.facebook.com/instaxHQ/"><img src="/wp-content/themes/Instax/images/facebook-icon.png" alt="Instax Facebook"></a>
-            <a target="_blank" href="https://www.pinterest.co.uk/instaxHQ/"><img src="/wp-content/themes/Instax/images/pinterest-icon.png" alt="Instax Pinterest"></a>
-            <a target="_blank" href="https://www.youtube.com/instaxhq"><img src="/wp-content/themes/Instax/images/youtube-icon.png" alt="Instax Youtube"></a>
+        <div class="socials text-center" >
+            <a href="https://twitter.com/Instax" target="_blank"><img src="/wp-content/themes/Instax/images/twitter-icon.png" alt="Instax Twitter"></a>
+            <a href="https://www.instagram.com/fujifilm_instax_northamerica/" target="_blank"><img src="/wp-content/themes/Instax/images/instagram-icon.png" alt="Instax Instagram"></a>
+            <a href="https://www.facebook.com/FUJIFILM.INSTAX/" target="_blank"><img src="/wp-content/themes/Instax/images/facebook-icon.png" alt="Instax Facebook"></a>
+            <a href="https://www.pinterest.com/INSTAXamericas/" target="_blank"><img src="/wp-content/themes/Instax/images/pinterest-icon.png" alt="Instax Pinterest"></a>
+            <a href="https://www.youtube.com/channel/UCCdyBNOeDzw7C0QOZQVoGQA" target="_blank"><img src="/wp-content/themes/Instax/images/youtube-icon.png" alt="Instax Youtube"></a>
         </div>
         <div class="col-xs-12">
             <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar("Footer menu 1") ) : ?>
