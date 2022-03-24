@@ -39,9 +39,9 @@
   max-width: 100px;
   font-size: 1.1rem;
 }
-.logo-main-menu-container #primary-menu .menu-item .sub-menu {
-  display: none;
+.logo-main-menu-container #primary-menu .menu-item .sub-menu-container {
   background: white;
+  display: none;
 }
 .logo-main-menu-container #primary-menu .menu-item .sub-menu img {
   display: none;
@@ -50,19 +50,24 @@
   .logo-main-menu-container #primary-menu .menu-item.main-menu-item {
     margin: auto;
   }
-  .logo-main-menu-container #primary-menu .menu-item:hover .sub-menu {
-    display: flex;
+  .logo-main-menu-container #primary-menu .menu-item:hover .sub-menu-container {
+    display: block;
   }
-  .logo-main-menu-container #primary-menu .menu-item .sub-menu {
-    text-align: center;
-    gap: 1em;
-    flex-wrap: wrap;
-    position: absolute;
+  .logo-main-menu-container #primary-menu .menu-item .sub-menu-container {
     padding: 2em;
+    padding-top: 0;
+    position: absolute;
     z-index: 99;
     left: 50%;
     transform: translateX(-50%);
     width: 1270px;
+    text-align: center;
+  }
+  .logo-main-menu-container #primary-menu .menu-item .sub-menu {
+    display: flex;
+    text-align: center;
+    gap: 1em;
+    flex-wrap: wrap;
   }
   .logo-main-menu-container #primary-menu .menu-item .sub-menu > * {
     flex: 1 0 21%;
@@ -74,10 +79,10 @@
     display: block;
     margin: 0 auto 1em;
   }
-  .logo-main-menu-container #primary-menu .menu-item.one-fifth > .sub-menu > * {
+  .logo-main-menu-container #primary-menu .menu-item.one-fifth > div.sub-menu-container > .sub-menu > * {
     flex: 1 0 17%;
   }
-  .logo-main-menu-container #primary-menu .menu-item.one-sixth > .sub-menu > * {
+  .logo-main-menu-container #primary-menu .menu-item.one-sixth > div.sub-menu-container > .sub-menu > * {
     flex: 1 0 14%;
   }
 }
@@ -143,18 +148,20 @@
     transform: translateY(-50%);
     top: 50%;
   }
-  .logo-main-menu-container #primary-menu .menu-item .sub-menu {
+  .logo-main-menu-container #primary-menu .menu-item .sub-menu-container {
+    max-height: 0;
     display: block;
     overflow: hidden;
-    position: unset;
-    transform: none;
-    margin: auto;
-    padding: 0;
-    max-height: 0;
   }
-  .logo-main-menu-container #primary-menu .menu-item .sub-menu.active {
+  .logo-main-menu-container #primary-menu .menu-item .sub-menu-container.active {
     max-height: 3000px;
     transition: max-height 1.5s ease-out;
+  }
+  .logo-main-menu-container #primary-menu .menu-item .sub-menu-container .sub-menu-title {
+    display: none;
+  }
+  .logo-main-menu-container #primary-menu .menu-item .sub-menu {
+    padding: 0;
   }
   .logo-main-menu-container #primary-menu .menu-item .sub-menu .sub-menu-item {
     margin-bottom: 1em;

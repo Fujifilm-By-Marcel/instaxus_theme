@@ -11,6 +11,7 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
+if(get_current_blog_id() != 1){
 if (!class_exists('wp_bootstrap_navwalker')) {
     class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 
@@ -1361,117 +1362,4 @@ class Logancee_WC_Blog_Cat_List_Walker extends Walker_Category {
     }
 
 }
-
-if ( class_exists( 'Woocommerce' ) ) {
- 
-include_once( WC()->plugin_path() . '/includes/walkers/class-product-cat-list-walker.php' );
-
-class Logancee_WC_Product_Cat_List_Walker extends WC_Product_Cat_List_Walker {
-    public $tree_type = 'product_cat';
-    public $db_fields = array ( 'parent' => 'parent', 'id' => 'term_id', 'slug' => 'slug' );
-
-
-	/**
-	 * Starts the list before the elements are added.
-	 *
-	 * @see Walker::start_lvl()
-	 * @since 2.1.0
-	 *
-	 * @param string $output Passed by reference. Used to append additional content.
-	 * @param int $depth Depth of category. Used for tab indentation.
-	 * @param array $args Will only append content if style argument value is 'list'.
-	 */
-	public function start_lvl( &$output, $depth = 0, $args = array() ) {
-		if ( 'list' != $args['style'] )
-			return;
-
-		$indent = str_repeat("\t", $depth);
-		$output .= "$indent<ul class='children'>\n";
-	}
-
-	/**
-	 * Ends the list of after the elements are added.
-	 *
-	 * @see Walker::end_lvl()
-	 * @since 2.1.0
-	 *
-	 * @param string $output Passed by reference. Used to append additional content.
-	 * @param int $depth Depth of category. Used for tab indentation.
-	 * @param array $args Will only append content if style argument value is 'list'.
-	 */
-	public function end_lvl( &$output, $depth = 0, $args = array() ) {
-        $indent = str_repeat("\t", $depth);
-		if ( 'list' != $args['style'] )
-			return;
-
-		$indent = str_repeat("\t", $depth);
-		$output .= "$indent</ul></div>\n";
-	}
-
-	/**
-	 * Start the element output.
-	 *
-	 * @see Walker::start_el()
-	 * @since 2.1.0
-	 *
-	 * @param string $output Passed by reference. Used to append additional content.
-	 * @param int $depth Depth of category in reference to parents.
-	 * @param integer $current_object_id
-	 */
-	public function start_el( &$output, $cat, $depth = 0, $args = array(), $current_object_id = 0 ) {
-		$output .= '<li class="panel cat-item cat-item-' . $cat->term_id;
-
-		$output .=  '"><a href="' . get_term_link( (int) $cat->term_id, $this->tree_type ) . '" class="';
-		
-        if ( $args['current_category'] == $cat->term_id ) {
-			$output .= ' active current-cat';
-		}
-
-		if ( $args['has_children'] && $args['hierarchical'] ) {
-			$output .= ' cat-parent';
-		}
-
-		if ( $args['current_category_ancestors'] && $args['current_category'] && in_array( $cat->term_id, $args['current_category_ancestors'] ) ) {
-			$output .= ' active current-cat-parent';
-		}
-        
-
-        $output .=  '">'.$cat->name;
-
-        if ( $args['show_count'] ) {
-            $output .= ' <span class="count">(' . $cat->count . ')</span>';
-        }
-
-        $output .=  '</a>';
-        if ( $args['has_children'] && $args['hierarchical'] ) {
-            
-            $output .= '
-                <span class="head">
-                <a class="accordion-toggle'.($args['current_category'] != $cat->term_id && !($args['current_category_ancestors'] && $args['current_category'] && in_array( $cat->term_id, $args['current_category_ancestors'])) ? ' collapsed' : '').'" data-toggle="collapse" data-parent="#accordion-category" href="#category'.$cat->term_id.'">
-                <span class="plus">+</span><span class="minus">-</span>
-                </a>
-                </span>
-                <div id="category'.$cat->term_id.'" class="panel-collapse collapse '.($args['current_category'] == $cat->term_id || ($args['current_category_ancestors'] && $args['current_category'] && in_array( $cat->term_id, $args['current_category_ancestors']))? ' in' : '').'" style="clear:both">
-                ';
-        }
-        
-	}
-
-	/**
-	 * Ends the element output, if needed.
-	 *
-	 * @see Walker::end_el()
-	 * @since 2.1.0
-	 *
-	 * @param string $output Passed by reference. Used to append additional content.
-	 * @param int $depth Depth of category. Not used.
-	 * @param array $args Only uses 'list' for whether should append to output.
-	 */
-	public function end_el( &$output, $cat, $depth = 0, $args = array() ) {
-		$output .= "</li>\n";
-	}
-
 }
-
-}
-

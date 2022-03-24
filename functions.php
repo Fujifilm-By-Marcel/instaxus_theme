@@ -3876,6 +3876,8 @@ add_action( 'wp_enqueue_scripts', 'include_carousel_scripts' );
  * Custom walker class.
  */
 class WPDocs_Walker_Nav_Menu extends Walker_Nav_Menu {
+
+    private $cur_item;
  
     /**
      * Starts the list before the elements are added.
@@ -3898,7 +3900,10 @@ class WPDocs_Walker_Nav_Menu extends Walker_Nav_Menu {
         );
         $class_names = implode( ' ', $classes );
  
-        // Build HTML for output.
+        // Build HTML for output.        
+        $output .= "<div class='sub-menu-container'>";        
+        $output .= "<h4 class='sub-menu-title'>".apply_filters( 'the_title', $this->cur_item->title, $this->cur_item->ID )."</h4>";
+        $output .= "<p>".esc_attr( $this->cur_item->description )."</p>";        
         $output .= "\n" . $indent . '<ul class="' . $class_names . '">' . "\n";
     }
  
@@ -3914,6 +3919,8 @@ class WPDocs_Walker_Nav_Menu extends Walker_Nav_Menu {
      * @param int    $id     Current item ID.
      */
     function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+        $this->cur_item = $item;
+
         global $wp_query;
         $indent = ( $depth > 0 ? str_repeat( "\t", $depth ) : '' ); // code indent
  
@@ -3974,4 +3981,20 @@ class WPDocs_Walker_Nav_Menu extends Walker_Nav_Menu {
         );
         $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
     }
+
+    
+
+    function end_lvl( &$output, $depth = 0, $args = null ) {
+        if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
+            $t = '';
+            $n = '';
+        } else {
+            $t = "\t";
+            $n = "\n";
+        }
+        $indent  = str_repeat( $t, $depth );
+        $output .= "$indent</ul>{$n}";
+        $output .= "</div>";
+    }
+
 }
