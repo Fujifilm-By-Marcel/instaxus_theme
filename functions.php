@@ -3903,7 +3903,7 @@ class WPDocs_Walker_Nav_Menu extends Walker_Nav_Menu {
         // Build HTML for output.        
         $output .= "<div class='sub-menu-container'>";        
         $output .= "<h4 class='sub-menu-title'>".apply_filters( 'the_title', $this->cur_item->title, $this->cur_item->ID )."</h4>";
-        $output .= "<p>".esc_attr( $this->cur_item->description )."</p>";        
+        $output .= "<p class='sub-menu-description'>".esc_attr( $this->cur_item->description )."</p>";        
         $output .= "\n" . $indent . '<ul class="' . $class_names . '">' . "\n";
     }
  

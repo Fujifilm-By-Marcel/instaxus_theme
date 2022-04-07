@@ -1,3 +1,4 @@
+// stack horizontally the logo and main menu in the header.
 .logo-main-menu-container{	
 	display:flex;
 	flex-direction: row;	
@@ -6,119 +7,15 @@
 	gap:1em;
 	padding:1em;
 	align-items:flex-end;
+
+	//make logo and link display block
 	.logo{
 		a, img{
 			display: block;			
 		}
 	}
-	#primary-menu{
-		display: flex;
-		flex-direction: row;
-		gap:2em;
-		margin-bottom:0;
-	    padding-inline-start: 0px;
 
-
-
-	    
-
-		.menu-item{
-			list-style: none;
-			> .menu-link{
-				font-size:1.4rem;
-				color:#000;
-				font-weight:bold;
-				line-height:1;
-				text-transform: uppercase;				
-				display: block;
-    			padding: 1.5em 0;
-    			text-align: center;
-			}
-			
-
-			&.alert-menu-item{
-				color: red;					
-				.menu-link{
-		    		color:red;
-		    		max-width:100px;
-		    		font-size:1.1rem;
-		    	}
-			}
-
-			.sub-menu-container{
-				background:white;
-				display:none;
-			}
-
-			.sub-menu{				
-				img{
-					display:none;
-				}
-			}
-
-			@media(min-width:1099px){
-
-				&.main-menu-item{
-			    	margin:auto;	    	
-			    }
-				&:hover .sub-menu-container{
-					display:block;
-				}		
-				.sub-menu-container{
-					padding:2em;
-					padding-top:0;
-					position: absolute;
-					z-index:99;
-					left: 50%;
-	    			transform: translateX(-50%);
-	    			width:1270px;	    			
-	    			text-align:center;
-				}	
-				.sub-menu{    		
-					display: flex;	
-	    			text-align:center;
-	    			gap: 1em;	    			
-	    			flex-wrap: wrap;		
-
-	    			> * {
-	    				flex: 1 0 21%;
-	    			}
-	    			.sub-menu-item .menu-link{
-	    				display: block;
-	    				img{
-	    					display: block;
-	    					margin: 0 auto 1em;    					
-	    				}
-	    			}
-	    			
-				}
-				&.one-fifth > div.sub-menu-container > .sub-menu > * {
-    				flex: 1 0 17%;
-    			}
-    			&.one-sixth > div.sub-menu-container > .sub-menu > * {
-    				flex: 1 0 14%;
-    			}
-			}
-			&.menu-item-has-children{
-				white-space: nowrap;
-				> .menu-link i{				
-					padding-left:1em;				
-					cursor:pointer;
-				}
-			}
-			@media (min-width: 1160px) and (max-width: 1270px){
-				.sub-menu{
-					width: 1160px;
-				}				
-			}
-			@media (min-width: 1099px) and (max-width: 1160px){
-				.sub-menu{
-					width: 1098px;
-				}	
-			}
-		}
-	}
-
+	//style menu-toggle button
 	.menu-toggle{
 		background: #f4f4f4;
 		padding:.5em;
@@ -135,44 +32,197 @@
 		}
 	}
 
-
+	//default menu-toggle to hidden
 	.menu-toggle{
 		display:none;
 	}
+
+
+	//deatult the menu to stack horizontally
+	#primary-menu{
+		display: flex;
+		flex-direction: row;
+		gap:0;
+		margin-bottom:0;
+	    padding-inline-start: 0px;	    
+
+	    //default menu items to have no list style
+		.menu-item{
+			list-style: none;
+
+			//default menu-links to font
+			.menu-link{
+				font-size:1.4rem;
+				color:#000;
+				font-weight:bold;
+				line-height:1;
+				text-transform: uppercase;				
+				display: block;
+    			padding: 1.5em 0;
+    			text-align: center;
+    			display: block;
+			}
+			
+			//default alert menu item style
+			&.alert-menu-item{
+				color: red;					
+				.menu-link{
+		    		color:red;
+		    	}
+			}
+
+			//default sub-menu container background color and hide by default
+			.sub-menu-container{
+				background:white;
+				display:none;
+			}
+
+			//default sub-menu images to hidden
+			.sub-menu{
+				//remove default initial padding from ul
+				padding: 0;				
+			}
+
+			//add spacing to caret icon
+			&.menu-item-has-children{				
+				> .menu-link i{				
+					padding-left:1em;				
+				}
+			}
+
+			//specify desktop styles
+			@media(min-width:1099px){
+
+				//desktop style for alert menu item
+				&.alert-menu-item{			
+					.menu-link{
+			    		max-width:100px;
+			    		font-size:1.1rem;
+			    	}
+				}
+
+				//vertically center and space main menu items
+				&.main-menu-item{
+			    	margin:auto;
+			    	margin-right:2em;
+			    	&:last-child{
+			    		margin-right:0;
+			    	}
+			    }
+
+			    //show sub menu items on hover
+				&:hover .sub-menu-container{
+					display:block;
+				}		
+
+				//center the sub-menu container and set default static width
+				.sub-menu-container{
+					padding:2em;
+					padding-top:0;
+					position: absolute;
+					z-index:99;
+					left: 50%;
+	    			transform: translateX(-50%);
+	    			width:1270px;	    			
+	    			text-align:center;
+				}	
+
+				//default sub-menu items to four per row
+				.sub-menu{    		
+					display: flex;	
+	    			text-align:center;
+	    			gap: 1em;	    			
+	    			flex-wrap: wrap;	
+	    			margin:auto;	
+
+	    			> * {
+	    				flex: 1 0 24%;
+	    			}
+
+	    			.sub-menu-item .menu-link{
+	    				//add spacing to images
+	    				img{
+	    					display: block;
+	    					margin: 0 auto 1em;    					
+	    				}
+	    			}
+	    			
+				}
+
+				//override menu items to 5 per row
+				&.one-fifth > div.sub-menu-container > .sub-menu > * {
+    				flex: 1 0 19%;
+    			}
+    			//override menu items to 6 per row
+    			&.one-sixth > div.sub-menu-container > .sub-menu > * {
+    				flex: 1 0 15%;
+    			}
+
+    			//prevent wrapping of caret icon
+    			&.menu-item-has-children{
+					white-space: nowrap;
+					.sub-menu-container{
+						white-space: unset;
+					}
+				}
+
+			}
+
+			//set various sub-menu widths to match existing styles - added via menu item class options
+			@media (min-width: 1160px) and (max-width: 1270px){
+				.sub-menu{
+					width: 1160px;
+				}				
+			}
+			@media (min-width: 1099px) and (max-width: 1160px){
+				.sub-menu{
+					width: 1098px;
+				}	
+			}
+		}
+	}
+
+	
+
+
+	//mobile specific styles
 	@media(max-width:1098px){
 
-
+		//override menu to stack vertically
 		#primary-menu{
 			flex-direction: column;
-    		gap: 1em;
+    		gap: 0;
     		text-align: center;
     		padding:2em;
 
     		.menu-item {
-    			&.alert-menu-item .menu-link{
-    				max-width: 550px;
-					font-size:1.4rem;
-				}
-    			.menu-link{
-    				display: block;
-    				max-width: 550px;
+    			
+    			//set margin for menu items
+    			margin-bottom:1em;
+    			&:last-child{
+    				margin-bottom:0;
+    			}
+
+    			//override menu link styles for mobile
+    			.menu-link{    				
+    				max-width: 410px;
     				margin: auto;
     				padding: 2em 1em;
     				background: #f1f1f1;
     				position:relative;    				
     			}
 
+    			//ovverride caret icon to right align
     			&.menu-item-has-children .menu-link i{
     				position: absolute;
 					right: 0;
 					padding:0.75em 0.75em 0.75em 1.5em;
 					font-size: 2.5rem;
 					transform: translateY(-50%);
-					top: 50%;
-    				
+					top: 50%;    				
     			}
 
-			
+				//set up animation for sub-menu container toggle - active class is added via javascript.	
 				.sub-menu-container{
 					max-height: 0;
 					display: block;
@@ -182,13 +232,21 @@
 				    	max-height: 3000px;
 				    	transition: max-height 1.5s ease-out;
 				    }
-				    .sub-menu-title{
+
+				    //hide text
+				    .sub-menu-title, .sub-menu-description{
 	    				display:none;
 	    			}
 				}
+				
 	    		.sub-menu{				    
-				    padding: 0;			 
+				    
+				    //hide sub-menu images
+				    img{
+						display:none;
+					}
 
+					//override spacing on sub-menu-items
 				    .sub-menu-item{
 				    	margin-bottom:1em;
 				    	&:first-child{
@@ -201,6 +259,7 @@
 	    		}
 	    	}
     		
+    		//menu item background colors - added via menu item class options
 			.blue-menu-item > a{
 				background:#04cbf4 !important;
 			}
@@ -224,11 +283,13 @@
 			}
 		}
 
+		//show menu toggle
 		.menu-toggle{
 			display:block;			
 		}	
-		.main-menu{
-			display: block;
+
+		//set up animation for main menu on mobile - active class added via javascript
+		.main-menu{			
 			max-height:0;
 			overflow:hidden;
 			position: absolute;
@@ -237,8 +298,7 @@
 		    transform: translateY(100%);
 		    z-index: 1000;
 		    background: white;
-		    width: 100vw;
-		    padding: 0;
+		    width: 100vw;		    
 		    
 		    &.active{
 		    	max-height: 3000px;
@@ -251,3 +311,7 @@
 
 }
 
+// set up sticky menu on desktop only
+@media(min-width:1099px){
+	
+}
