@@ -98,7 +98,7 @@
     margin: auto;
   }
   .logo-main-menu-container #primary-menu .menu-item .sub-menu > * {
-    flex: 1 0 24%;
+    flex: 1 0 23%;
   }
   .logo-main-menu-container #primary-menu .menu-item .sub-menu .sub-menu-item .menu-link img {
     display: block;
@@ -219,4 +219,22 @@
     max-height: 3000px;
     transition: max-height 1.5s ease-out;
   }
+}
+@media (min-width: 1099px) {
+  .new-header {
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    background: #fff;
+    width: 100%;
+  }
+  .main-content {
+    margin-top: 117px;
+  }
+}
+.new-header a {
+  -moz-transition: none;
+  -webkit-transition: none;
+  -o-transition: color 0 ease-in;
+  transition: none;
 }

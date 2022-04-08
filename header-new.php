@@ -44,7 +44,7 @@ $logancee_options = logancee_get_options();?>
    
 <div class="<?php if($logancee_options['layout-main'] == 2) { echo 'fixed-body'; } else { echo 'standard-body'; } ?>">
 	<div id="main" >           
-    	<div class="wrap">
+    	<div class="wrap new-header">
             <div class="standard-body">
                 <div class="full-width" style="position: relative;">
                     <div class="container">                    	
